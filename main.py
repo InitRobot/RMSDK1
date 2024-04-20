@@ -1,7 +1,7 @@
-import socket
-import re
-import time
 import os
+import re
+import socket
+
 import select
 
 global tcp_socket
@@ -34,17 +34,17 @@ def start_get_game_msg():
 	tcp_socket.send(msg.encode('utf-8'))
 	buf = tcp_socket.recv(1024)
 	print(buf.decode('utf-8'))
-
+	
 	msg = "quit;"
 	tcp_socket.send(msg.encode('utf-8'))
 	buf = tcp_socket.recv(1024)
 	print(buf.decode('utf-8'))
-
+	
 	msg = "command;"
 	tcp_socket.send(msg.encode('utf-8'))
 	buf = tcp_socket.recv(1024)
 	print(buf.decode('utf-8'))
-
+	
 	# 开始赛事推送
 	msg = "game_msg on;"
 	tcp_socket.send(msg.encode('utf-8'))
@@ -66,14 +66,14 @@ def main():
 			game_msg = re.findall(r"\d+", buf.decode('utf-8'))
 			print(game_msg)
 			if int(game_msg[6]) > 0:
-				key_num = [0]*3
+				key_num = [0] * 3
 				for i in range(7, 7 + int(game_msg[6]), 1):
 					key_num[i - 7] = int(game_msg[i])
 				print(key_num)
 				# 判断按下的按键并触发对应函数
-				if 81 in key_num:#按下Q
+				if 81 in key_num:  # 按下Q
 					os.system('cd ~/RM-yolo/RMSDK && python3 06_final.py')
-
+	
 	# 关闭端口连接
 	tcp_socket.shutdown(socket.SHUT_WR)
 	tcp_socket.close()
