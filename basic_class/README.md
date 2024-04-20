@@ -70,6 +70,43 @@
 
 
 
+### 使用示例：
+
+"""
+
+以下为连接TCP,UDP获取赛事引擎数据的示例
+
+
+
+"""
+
+TCP = TCP_connection(printing=True)
+
+UDP = UDP_connection(printing=True)
+
+TCP.connect_enter_SDK()
+
+UDP.connect()
+
+TCP.IN_OUT("game_msg on;")
+
+for i in range(1,1000):
+
+  msg = UDP.try_get()
+
+  msg_solved = solve_game(msg)
+
+  keys = solve_key(msg_solved)
+
+  keyname = solve_key_name(keys)
+
+  print("keynames:", keyname)
+
+UDP.disconnect()
+
+TCP.disconnect()
+
+
 # 日志
 
 - 20240420
@@ -82,3 +119,4 @@
     - solve_key_name
     - def solve_gimbal
     - def solve_chassis_position
+  - 13:31完成样例代码

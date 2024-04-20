@@ -10,8 +10,8 @@ class TCP_connection:
     port = 40923
     printing = True
     connection = False
-    def __init__(self, printing_ = True):
-        self.printing = printing_
+    def __init__(self, printing = True):
+        self.printing = printing
 
     def connect(self):# 与机器人控制命令端口建立 TCP 连接
         self.address = (self.host, int(self.port))
@@ -108,8 +108,8 @@ class UDP_connection:
     printing = True
     connection = False
 
-    def __init__(self, printing_ = True):
-        self.printing = printing_
+    def __init__(self, printing = True):
+        self.printing = printing
 
     def connect(self):# 与机器人控制命令端口建立 UDP 连接
         self.address = (self.host, int(self.port))
@@ -256,3 +256,24 @@ def solve_chassis_position(msg, printing = True):
             print('please give a chassis push position push')
     return result
 
+
+"""
+以下为连接TCP,UDP获取赛事引擎数据的示例
+
+"""
+TCP = TCP_connection(printing=True)
+UDP = UDP_connection(printing=True)
+TCP.connect_enter_SDK()
+UDP.connect()
+TCP.IN_OUT("game_msg on;")
+for i in range(1,1000):
+    msg = UDP.try_get()
+    msg_solved = solve_game(msg)
+    keys = solve_key(msg_solved)
+    keyname = solve_key_name(keys)
+    print("keynames:", keyname)
+
+UDP.disconnect()
+TCP.disconnect()
+
+#-------以上为示例--------
