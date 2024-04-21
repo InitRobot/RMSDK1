@@ -1,6 +1,7 @@
 
 def solve_game(msg, printing=True):  # 用于解析赛事数据推送
 	result = ''
+	solveablility = True
 	if msg[0:14] == 'game msg push ' and msg[-1] == ';':
 		# print('right_start')
 		info = msg[15:-2]
@@ -11,9 +12,28 @@ def solve_game(msg, printing=True):  # 用于解析赛事数据推送
 		# print(info_list_int)
 		result = info_list_int
 	else:
+		solveablility = False
 		if printing:
 			print('please give a game msg push')
-	return result
+	return result, solveablility
+
+def solve_information(msg, printing=True): # 用于从赛事数据推送1中获得信息
+    result = {
+		"time" : "",
+		"health" : "",
+		"ammo" : ""
+    }
+	
+    if msg[0] != 1 or msg[1] != 11:
+		
+        if printing:
+            print("unsolveable")
+        return result
+    else:
+        result["time"] = msg[3]
+        result["health"] = msg[7]
+        result["ammo"] = msg[9]
+    return result
 
 
 def solve_key(msg, printing=True):  # 用于从赛事数据推送0中获得键位
@@ -50,6 +70,21 @@ def solve_key_name(keys, printing=True):  # 将获得键位转换为真实名称
 			key_name_list.append("Caps")
 	result = key_name_list
 	return result
+
+
+def solve_game_msg(msg, printing = True):
+	solveablity = True
+	msg_solved, solveablity = solve_game(msg,printing=printing)
+	if solveablity and msg_solved[0] == 1:
+		msg_information = solve_information(msg_solved,printing=printing)
+		print(msg_information)
+	elif solveablity and msg_solved[0] == 0:
+		msg_keys = solve_key(msg_solved,printing=printing)
+		msg_keys_name = solve_key_name(msg_keys,printing=printing)
+		print(msg_keys_name)
+
+m =  "game msg push [1, 11, 4, 1, 0, 200, 0, 200, 0, 72, 0, 141, 1];"
+solve_game_msg(m)
 
 
 def solve_gimbal(msg, printing=True):

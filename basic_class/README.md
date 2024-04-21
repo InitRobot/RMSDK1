@@ -79,13 +79,21 @@ len指其之后的位数
 
 用于解析赛事数据推送
 
+### def solve_information
+
+用于从赛事数据推送1中获得信息
+
 ### def solve_key
 
-用于从赛事数据推送中获得键位
+用于从赛事数据推送0中获得键位
 
-### solve_key_name
+### def solve_key_name
 
 将获得键位转换为真实名称
+
+### def solve_game_msg
+
+将获得信息转换为具体信息
 
 ### def solve_gimbal
 
@@ -143,3 +151,5 @@ TCP.disconnect()
         - 完成部分msg解析
     - 12:56
         - 优化为import文件
+    - 13:55
+        - 完成def solve_game_msg
