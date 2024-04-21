@@ -23,53 +23,57 @@ len指其之后的位数
 - health: 血量
 - ammo: 发弹量
 
-## class TCP_connect
+## connect.py
+
+### class TCP_connect
 
 用于TCP相关连接，断开，消息接收等功能
 
-### def connect
+#### 	def connect
 
 与机器人控制命令端口建立 TCP 连接
 
-### def disconnect
+#### 	def disconnect
 
 与机器人控制命令端口断开 TCP 连接
 
-### def IN
+#### 	def IN
 
 检测并向机器发送message
 
-### def try_get_message
+#### 	def try_get_message
 
 这个函数默认等待5秒钟，如果在这个时间内没有收到机器人的返回结果，就会立即返回'no_OUT'。如果收到了机器人的返回结果，就会解码并返回结果字符串。
 
-### def OUT
+#### 	def OUT
 
 检测机器回复
 
-### def IN_OUT
+#### 	def IN_OUT
 
 检测并向机器发送message，检测机器回复
 
-### def connect_enter_SDK
+#### 	def connect_enter_SDK
 
 与机器人控制命令端口建立 TCP 连接，并进入SDK模式控制
 
-## class UDP_connect
+### class UDP_connect
 
 用于UCP相关连接，断开，消息接收等功能
 
-### def connect
+#### 	def connect
 
 与机器人控制命令端口建立 UDP 连接
 
-### def disconnect
+#### 	def disconnect
 
 与机器人控制命令端口断开UDP 连接
 
-### def try_get
+#### 	def try_get
 
 这个函数默认等待5秒钟，如果在这个时间内没有收到机器人的返回结果，就会立即返回'no_OUT'。如果收到了机器人的返回结果，就会解码并返回结果字符串。
+
+## solve.py
 
 ### def solve_game
 
@@ -92,29 +96,25 @@ len指其之后的位数
 以下为连接TCP,UDP获取赛事引擎数据的示例
 
 ```python
-TCP = TCP_connection(printing=True)
-
-UDP = UDP_connection(printing=True)
-
-TCP.connect_enter_SDK()
-
-UDP.connect()
-
-TCP.IN_OUT("game_msg on;")
-
-for i in range(1, 1000):
-	msg = UDP.try_get()
-	
-	msg_solved = solve_game(msg)
-	
-	keys = solve_key(msg_solved)
-	
-	keyname = solve_key_name(keys)
-	
-	print("keynames:", keyname)
-
+print("start")
+TCP = connect.TCP_connection(printing=False)
+UDP = connect.UDP_connection(printing=False)
+TCP.connect_enter_SDK(printing=False)
+UDP.connect(printing=False)
+TCP.IN_OUT("game_msg on;",printing=False)
+while True:
+	msg = UDP.try_get(timeout=1,printing=False)
+	if msg != "no_OUT":
+		msg_solved = solve.solve_game(msg,printing=False)
+		if msg_solved[0] == 0:
+			keys = solve.solve_key(msg_solved,printing=False)
+			keyname = solve.solve_key_name(keys,printing=False)
+			print("keynames:", keyname)
+		elif msg_solved[0] == 1:
+			print("Unknow:",msg_solved)
+		else:
+			print("-----???-----",msg_solved)
 UDP.disconnect()
-
 TCP.disconnect()
 ```
 
@@ -141,3 +141,5 @@ TCP.disconnect()
         - 猜测第二位表示阶段（此处为第四阶段即手动2），第四位表示剩余时间（剩余一秒），倒数第四位发单量，倒数第六位血量
     - 11:59
         - 完成部分msg解析
+    - 12:56
+        - 优化为import文件
