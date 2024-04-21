@@ -108,3 +108,7 @@ TCP.disconnect()
         - def solve_gimbal
         - def solve_chassis_position
     - 13:31完成样例代码
+- 20240421
+    - 11:22 debug，目前可获取赛事数据
+        - 注意到自检过程中会无法接受数据
+        - 有时会出现cmd_id为1的赛事数据（一般键位收到的是0），猜测是赛事官方的时间
