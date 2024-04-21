@@ -88,6 +88,7 @@ def solve_game_msg(msg, printing = True):
 	solveablity = True
 	msg_solved, solveablity = solve_game(msg,printing=printing)
 	if solveablity and msg_solved[0] == 1:
+		#print(msg)
 		msg_information = solve_information(msg_solved,printing=printing)
 		if printing:
 			print(msg_information)

@@ -14,6 +14,7 @@ def example():
 	#for i in range(1, 50):
 	while True:
 		msg = UDP.try_get(timeout=1,printing=False)
+		#print(msg)
 		if msg != "no_OUT":
 			msg_solved = solve.solve_game_msg(msg,printing=False)
 			print(msg_solved)
@@ -31,6 +32,9 @@ def example():
 				print("Unknow:",msg_solved)
 			else:
 				print("-----???-----",msg_solved)'''
+
+def chassis_controll
+
 
 if __name__ == '__main__':
 	example()
