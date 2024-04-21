@@ -188,7 +188,7 @@ def solve_key(msg, printing=True):  # 用于从赛事数据推送中获得键位
 	return result
 
 
-def solve_key_name(keys):  # 将获得键位转换为真实名称
+def solve_key_name(keys, printing=True):  # 将获得键位转换为真实名称
 	result = []
 	key_name_list = []
 	for key in keys:
@@ -267,19 +267,24 @@ def solve_chassis_position(msg, printing=True):
 以下为连接TCP,UDP获取赛事引擎数据的示例
 """
 print("start")
-TCP = TCP_connection(printing=True)
-UDP = UDP_connection(printing=True)
-TCP.connect_enter_SDK()
-UDP.connect()
-TCP.IN_OUT("game_msg on;")
+TCP = TCP_connection(printing=False)
+UDP = UDP_connection(printing=False)
+TCP.connect_enter_SDK(printing=False)
+UDP.connect(printing=False)
+TCP.IN_OUT("game_msg on;",printing=False)
 #for i in range(1, 50):
 while True:
-	msg = UDP.try_get(timeout=1)
+	msg = UDP.try_get(timeout=1,printing=False)
 	if msg != "no_OUT":
-		msg_solved = solve_game(msg)
-		keys = solve_key(msg_solved)
-		keyname = solve_key_name(keys)
-		print("keynames:", keyname)
+		msg_solved = solve_game(msg,printing=False)
+		if msg_solved[0] == 0:
+			keys = solve_key(msg_solved,printing=False)
+			keyname = solve_key_name(keys,printing=False)
+			#print("keynames:", keyname)
+		elif msg_solved[0] == 1:
+			print("Unknow:",msg_solved)
+		else:
+			print("-----???-----",msg_solved)
 
 UDP.disconnect()
 TCP.disconnect()
