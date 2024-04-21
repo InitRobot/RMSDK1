@@ -51,7 +51,9 @@ def solve_key(msg, printing=True):  # 用于从赛事数据推送0中获得键�
 
 
 def solve_key_name(keys, printing=True):  # 将获得键位转换为真实名称
-	result = []
+	result = {
+		"keys" : []
+    }
 	key_name_list = []
 	for key in keys:
 		if key >= 48 and key <= 90:
@@ -68,23 +70,38 @@ def solve_key_name(keys, printing=True):  # 将获得键位转换为真实名称
 			key_name_list.append("Alt")
 		elif key == 20:
 			key_name_list.append("Caps")
-	result = key_name_list
+	if printing:
+		print(key_name_list)
+	result["keys"] = key_name_list
 	return result
 
 
 def solve_game_msg(msg, printing = True):
+	result = {
+		"time" : "",
+		"health" : "",
+		"ammo" : "",
+		"keys" : [],
+		"mouse_keys" : "",
+		"mouse_move" : [0,0],
+    }
 	solveablity = True
 	msg_solved, solveablity = solve_game(msg,printing=printing)
 	if solveablity and msg_solved[0] == 1:
 		msg_information = solve_information(msg_solved,printing=printing)
-		print(msg_information)
+		if printing:
+			print(msg_information)
+		result.update(msg_information)
 	elif solveablity and msg_solved[0] == 0:
+		
 		msg_keys = solve_key(msg_solved,printing=printing)
 		msg_keys_name = solve_key_name(msg_keys,printing=printing)
-		print(msg_keys_name)
-
-m =  "game msg push [1, 11, 4, 1, 0, 200, 0, 200, 0, 72, 0, 141, 1];"
-solve_game_msg(m)
+		if printing:
+			print(msg_keys_name)
+		result.update(msg_keys_name)
+		result["mouse_keys"] = msg_solved[2]
+		result["mouse_move"] = msg_solved[3:5]
+	return result
 
 
 def solve_gimbal(msg, printing=True):

@@ -15,6 +15,13 @@ def example():
 	while True:
 		msg = UDP.try_get(timeout=1,printing=False)
 		if msg != "no_OUT":
+			msg_solved = solve.solve_game_msg(msg,printing=False)
+			print(msg_solved)
+	UDP.disconnect()
+	TCP.disconnect()
+
+	# -------以上为示例--------
+'''
 			msg_solved = solve.solve_game(msg,printing=False)
 			if msg_solved[0] == 0:
 				keys = solve.solve_key(msg_solved,printing=False)
@@ -23,13 +30,7 @@ def example():
 			elif msg_solved[0] == 1:
 				print("Unknow:",msg_solved)
 			else:
-				print("-----???-----",msg_solved)
-
-	UDP.disconnect()
-	TCP.disconnect()
-
-	# -------以上为示例--------
-
+				print("-----???-----",msg_solved)'''
 
 if __name__ == '__main__':
 	example()
