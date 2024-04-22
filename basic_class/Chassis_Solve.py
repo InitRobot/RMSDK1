@@ -1,7 +1,5 @@
 import math
 
-import SDK_
-
 forward_speed = 90
 backward_speed = 50
 side_speed = 50
@@ -98,3 +96,10 @@ def Disk_solve(keys, degree, spin=1, printing=True):
 	wheel_spin[3] = (wheel_spin[3] - 1) / 2
 	
 	return wheel_spin
+
+
+def move(TCP, wheel, printing=True):
+	wheel = [i * 1000 / 100 * speed for i in wheel]
+	chassis = "chassis wheel w2 " + str(wheel[0]) + " w1 " + str(wheel[1]) + " w3 " + str(wheel[2]) + " w4 " + str(
+		wheel[3]) + ";"
+	TCP.IN_OUT(chassis, printing=printing)

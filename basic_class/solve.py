@@ -1,5 +1,7 @@
+
 def solve_game(msg, printing=True):  # 用于解析赛事数据推送
 	result = ''
+	solveablility = True
 	if msg[0:14] == 'game msg push ' and msg[-1] == ';':
 		# print('right_start')
 		info = msg[15:-2]
@@ -10,12 +12,31 @@ def solve_game(msg, printing=True):  # 用于解析赛事数据推送
 		# print(info_list_int)
 		result = info_list_int
 	else:
+		solveablility = False
 		if printing:
 			print('please give a game msg push')
-	return result
+	return result, solveablility
+
+def solve_information(msg, printing=True): # 用于从赛事数据推送1中获得信息
+    result = {
+		"time" : "",
+		"health" : "",
+		"ammo" : ""
+    }
+	
+    if msg[0] != 1 or msg[1] != 11:
+		
+        if printing:
+            print("unsolveable")
+        return result
+    else:
+        result["time"] = msg[3]
+        result["health"] = msg[7]
+        result["ammo"] = msg[9]
+    return result
 
 
-def solve_key(msg, printing=True):  # 用于从赛事数据推送中获得键位
+def solve_key(msg, printing=True):  # 用于从赛事数据推送0中获得键位
 	result = []
 	key_n = msg[6]
 	if printing:
@@ -29,8 +50,10 @@ def solve_key(msg, printing=True):  # 用于从赛事数据推送中获得键位
 	return result
 
 
-def solve_key_name(keys):  # 将获得键位转换为真实名称
-	result = []
+def solve_key_name(keys, printing=True):  # 将获得键位转换为真实名称
+	result = {
+		"keys" : []
+    }
 	key_name_list = []
 	for key in keys:
 		if key >= 48 and key <= 90:
@@ -47,7 +70,38 @@ def solve_key_name(keys):  # 将获得键位转换为真实名称
 			key_name_list.append("Alt")
 		elif key == 20:
 			key_name_list.append("Caps")
-	result = key_name_list
+	if printing:
+		print(key_name_list)
+	result["keys"] = key_name_list
+	return result
+
+
+def solve_game_msg(msg, printing = True):
+	result = {
+		"time" : "",
+		"health" : "",
+		"ammo" : "",
+		"keys" : [],
+		"mouse_keys" : "",
+		"mouse_move" : [0,0],
+    }
+	solveablity = True
+	msg_solved, solveablity = solve_game(msg,printing=printing)
+	if solveablity and msg_solved[0] == 1:
+		#print(msg)
+		msg_information = solve_information(msg_solved,printing=printing)
+		if printing:
+			print(msg_information)
+		result.update(msg_information)
+	elif solveablity and msg_solved[0] == 0:
+		
+		msg_keys = solve_key(msg_solved,printing=printing)
+		msg_keys_name = solve_key_name(msg_keys,printing=printing)
+		if printing:
+			print(msg_keys_name)
+		result.update(msg_keys_name)
+		result["mouse_keys"] = msg_solved[2]
+		result["mouse_move"] = msg_solved[3:5]
 	return result
 
 
