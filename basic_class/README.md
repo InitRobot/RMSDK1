@@ -159,3 +159,5 @@ TCP.disconnect()
         - 解决一些小问题
 - 20240422
     - 6:53 开始完成chassis解算
+- 20240423
+    - 6:40 完成chassis:straight_solve，未测试

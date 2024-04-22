@@ -1,5 +1,6 @@
 import connect
 import solve
+import Chassis_Solve
 
 def example():
 	"""
@@ -33,7 +34,24 @@ def example():
 			else:
 				print("-----???-----",msg_solved)'''
 
-def chassis_controll
+def chassis_controll():
+	print("start")
+	TCP = connect.TCP_connection(printing=False)
+	UDP = connect.UDP_connection(printing=False)
+	TCP.connect_enter_SDK(printing=False)
+	UDP.connect(printing=False)
+	TCP.IN_OUT("game_msg on;",printing=False)
+	#for i in range(1, 50):
+	while True:
+		msg = UDP.try_get(timeout=1,printing=False)
+		#print(msg)
+		if msg != "no_OUT":
+			msg_solved = solve.solve_game_msg(msg,printing=False)
+			print(msg_solved)
+			wheel_output = Chassis_Solve.Stright_Solve(msg_solved["keys"],printing = True)
+			Chassis_Solve.move(TCP,wheel_output,printing = True)
+	UDP.disconnect()
+	TCP.disconnect()
 
 
 if __name__ == '__main__':

@@ -1,4 +1,5 @@
 import math
+from connect import TCP_connection, UDP_connection
 
 forward_speed = 90
 backward_speed = 50
@@ -37,8 +38,8 @@ def Stright_Solve(keys, printing=True):
 	return result
 
 
-def Disk_solve(keys, degree, spin=1, printing=True):
-	SDK_.IN_OUT("robot mode free;", printing=printing)
+def Disk_solve(TCP, keys, degree, spin=1, printing=True):
+	TCP.IN_OUT("robot mode free;", printing=printing)
 	# 对应        左右
 	wheel_stright = [0, 0,  # 前(head)
 	                 0, 0]  # 后(tail)
@@ -97,6 +98,7 @@ def Disk_solve(keys, degree, spin=1, printing=True):
 	
 	return wheel_spin
 
+speed = 100
 
 def move(TCP, wheel, printing=True):
 	wheel = [i * 1000 / 100 * speed for i in wheel]
