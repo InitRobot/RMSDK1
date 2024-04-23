@@ -42,11 +42,18 @@ def chassis_controll():
 	UDP.connect(printing=False)
 	TCP.IN_OUT("game_msg on;",printing=False)
 	#for i in range(1, 50):
+	wait = 0
 	while True:
 		msg = UDP.try_get(timeout=1,printing=False)
 		#print(msg)
+		disk_mode = True
 		if msg != "no_OUT":
 			msg_solved = solve.solve_game_msg(msg,printing=False)
+			if wait >= 0:
+				wait -= 1
+			if "SPACE" in msg_solved["keys"] and wait == 20:
+				disk_mode = not disk_mode
+				wait = 20
 			print(msg_solved)
 			wheel_output = Chassis_Solve.Stright_Solve(msg_solved["keys"],printing = True)
 			Chassis_Solve.move(TCP,wheel_output,printing = True)
