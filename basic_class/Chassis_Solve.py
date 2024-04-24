@@ -98,7 +98,7 @@ def Disk_solve(TCP, keys, degree, spin=1, printing=True):
 	
 	return wheel_spin
 
-speed = 100
+speed = 10
 
 def move(TCP, wheel, printing=True):
 	wheel = [i * 1000 / 100 * speed for i in wheel]

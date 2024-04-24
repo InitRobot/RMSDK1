@@ -42,24 +42,31 @@ def chassis_controll():
 	UDP.connect(printing=False)
 	TCP.IN_OUT("game_msg on;",printing=False)
 	#for i in range(1, 50):
+	disk_mode = False
 	wait = 0
 	while True:
 		msg = UDP.try_get(timeout=1,printing=False)
 		#print(msg)
-		disk_mode = True
 		if msg != "no_OUT":
 			msg_solved = solve.solve_game_msg(msg,printing=False)
-			if wait >= 0:
+			if wait > 0:
 				wait -= 1
-			if "SPACE" in msg_solved["keys"] and wait == 20:
+			#print(msg_solved["keys"], "---", wait)
+			if "M" in msg_solved["keys"] and wait == 0:
+				print(msg_solved["keys"], "---", wait)
 				disk_mode = not disk_mode
-				wait = 20
-			print(msg_solved)
-			wheel_output = Chassis_Solve.Stright_Solve(msg_solved["keys"],printing = True)
-			Chassis_Solve.move(TCP,wheel_output,printing = True)
+				wait = 10
+				print("mode_change")
+			#print(msg_solved)
+			if disk_mode:
+				degree = solve.solve_gimbal(TCP.IN_OUT("gimbal attitude ?;",printing=False),printing=False)
+				wheel_output = Chassis_Solve.Disk_solve(TCP,msg_solved["keys"],degree[1],printing = False)
+			elif not disk_mode:
+				wheel_output = Chassis_Solve.Stright_Solve(msg_solved["keys"],printing = False)
+			Chassis_Solve.move(TCP,wheel_output,printing = False)
 	UDP.disconnect()
 	TCP.disconnect()
 
 
 if __name__ == '__main__':
-	example()
+	chassis_controll()

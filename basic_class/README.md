@@ -165,3 +165,5 @@ TCP.disconnect()
     - 6:53 开始完成chassis解算
 - 20240423
     - 6:40 完成chassis:straight_solve，未测试
+- 20240424
+    - 17:49 完成小陀螺和直排控制，未设置回中
