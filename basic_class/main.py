@@ -47,6 +47,7 @@ def chassis_controll():
 	while True:
 		msg = UDP.try_get(timeout=1,printing=False)
 		#print(msg)
+		#print(msg)
 		if msg != "no_OUT":
 			msg_solved = solve.solve_game_msg(msg,printing=False)
 			if wait > 0:
@@ -57,12 +58,14 @@ def chassis_controll():
 				disk_mode = not disk_mode
 				wait = 10
 				print("mode_change")
+				if not disk_mode:
+					pass
 			#print(msg_solved)
 			if disk_mode:
 				degree = solve.solve_gimbal(TCP.IN_OUT("gimbal attitude ?;",printing=False),printing=False)
 				wheel_output = Chassis_Solve.Disk_solve(TCP,msg_solved["keys"],degree[1],printing = False)
 			elif not disk_mode:
-				wheel_output = Chassis_Solve.Stright_Solve(msg_solved["keys"],printing = False)
+				wheel_output = Chassis_Solve.Stright_Solve(TCP,msg_solved["keys"],printing = False)
 			Chassis_Solve.move(TCP,wheel_output,printing = False)
 	UDP.disconnect()
 	TCP.disconnect()

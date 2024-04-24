@@ -103,6 +103,12 @@ len指其之后的位数
 
 ### def Stright_Solve
 
+### def Disk_solve
+
+### def move
+
+### def recenter
+
 # 使用示例：
 
 以下为连接TCP,UDP获取赛事引擎数据的示例
@@ -167,3 +173,5 @@ TCP.disconnect()
     - 6:40 完成chassis:straight_solve，未测试
 - 20240424
     - 17:49 完成小陀螺和直排控制，未设置回中
+- 20240425
+    - 6:45 完成回中，但操作延迟有点大

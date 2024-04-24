@@ -61,7 +61,7 @@ class TCP_connection:
 			ready = select.select([self.TCP_socket], [], [], timeout)
 			if ready[0]:
 				# 如果有可读数据，接收并解码
-				buf = self.TCP_socket.recv(1024)
+				buf = self.TCP_socket.recv(10240)
 				result = buf.decode('utf-8')
 			else:
 				result = 'no_OUT'

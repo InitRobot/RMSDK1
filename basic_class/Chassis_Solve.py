@@ -6,9 +6,9 @@ backward_speed = 50
 side_speed = 50
 
 
-def Stright_Solve(keys, printing=True):
+def Stright_Solve(TCP, keys, printing=True):
 	# SDK_.IN_OUT("gimbal recenter;")
-	
+	TCP.IN_OUT("robot mode gimbal_lead;", printing=printing)
 	result = []
 	# 对应    左右
 	wheel = [0, 0,  # 前(head)
@@ -87,7 +87,7 @@ def Disk_solve(TCP, keys, degree, spin=1, printing=True):
 	if len(keys) == 3:
 		for i in range(0, 4):
 			wheel_spin[i] = (wheel_stright[1][i] + wheel_stright[2][i]) / 2
-	
+	#print(wheel_spin)
 	# spin
 	if printing:
 		print('sp', wheel_spin)
@@ -105,3 +105,6 @@ def move(TCP, wheel, printing=True):
 	chassis = "chassis wheel w2 " + str(wheel[0]) + " w1 " + str(wheel[1]) + " w3 " + str(wheel[2]) + " w4 " + str(
 		wheel[3]) + ";"
 	TCP.IN_OUT(chassis, printing=printing)
+
+def recenter(TCP, printing = True):
+	pass
