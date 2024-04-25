@@ -105,6 +105,3 @@ def move(TCP, wheel, printing=True):
 	chassis = "chassis wheel w2 " + str(wheel[0]) + " w1 " + str(wheel[1]) + " w3 " + str(wheel[2]) + " w4 " + str(
 		wheel[3]) + ";"
 	TCP.IN_OUT(chassis, printing=printing)
-
-def recenter(TCP, printing = True):
-	pass
