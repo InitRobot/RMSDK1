@@ -60,7 +60,7 @@ def chassis_controll():
 				print("mode_change")
 				if not disk_mode:
 					pass
-			#print(msg_solved)
+			print(msg_solved)
 			if disk_mode:
 				degree = solve.solve_gimbal(TCP.IN_OUT("gimbal attitude ?;",printing=False),printing=False)
 				wheel_output = Chassis_Solve.Disk_solve(TCP,msg_solved["keys"],degree[1],printing = False)
