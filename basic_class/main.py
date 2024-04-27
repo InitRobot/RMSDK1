@@ -1,6 +1,7 @@
 import connect
 import solve
 import Chassis_Solve
+import time
 
 def example():
 	"""
@@ -45,6 +46,7 @@ def chassis_controll():
 	disk_mode = False
 	wait = 0
 	while True:
+		time.sleep(0.1)
 		msg = UDP.try_get(timeout=1,printing=False)
 		#print(msg)
 		#print(msg)
