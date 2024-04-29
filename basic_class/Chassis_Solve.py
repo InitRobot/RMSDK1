@@ -8,7 +8,7 @@ side_speed = 50
 
 def Stright_Solve(TCP, keys, printing=True):
 	# SDK_.IN_OUT("gimbal recenter;")
-	TCP.IN_OUT("robot mode gimbal_lead;", printing=printing)
+	TCP.IN_OUT("robot mode free;", printing=printing)
 	result = []
 	# 对应    左右
 	wheel = [0, 0,  # 前(head)

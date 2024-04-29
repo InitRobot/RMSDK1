@@ -45,7 +45,7 @@ def chassis_controll():
 	#for i in range(1, 50):
 	disk_mode = False
 	wait = 0
-	TCP.IN_OUT("robot mode gimbal_lead;", printing=True)
+	TCP.IN_OUT("robot mode free;", printing=True)
 	while True:
 		time.sleep(0.1)
 		msg = UDP.try_get(timeout=1,printing=False)
