@@ -47,7 +47,7 @@ def chassis_controll():
 	wait = 0
 	TCP.IN_OUT("robot mode free;", printing=True)
 	while True:
-		time.sleep(0.1)
+		#time.sleep(0.1)
 		msg = UDP.try_get(timeout=1,printing=False)
 		#print(msg)
 		#print(msg)
