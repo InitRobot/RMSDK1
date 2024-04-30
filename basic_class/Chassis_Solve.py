@@ -7,6 +7,7 @@ side_speed = 50
 
 
 def Stright_Solve(TCP, degree, keys, printing=True):
+	speed_stright = 2
 	# SDK_.IN_OUT("gimbal recenter;")
 	#TCP.IN_OUT("robot mode free;", printing=printing)
 	result = []
@@ -39,9 +40,9 @@ def Stright_Solve(TCP, degree, keys, printing=True):
 		wheel[3] += 1
 	for i in range(len(wheel)):
 		if wheel[i] > 0:
-			wheel[i] = 1 + wheel2[i]
+			wheel[i] = speed_stright + wheel2[i]
 		elif wheel[i] < 0:
-			wheel[i] = -1 + wheel2[i]
+			wheel[i] = -speed_stright + wheel2[i]
 		else:
 			wheel[i] = wheel2[i]
 	if printing:
@@ -51,6 +52,8 @@ def Stright_Solve(TCP, degree, keys, printing=True):
 
 
 def Disk_solve(TCP, keys, degree, spin=1, printing=True):
+	speed_disk = 2
+	speed_spin = 1.5
 	#TCP.IN_OUT("robot mode free;", printing=printing)
 	# 对应        左右
 	wheel_stright = [0, 0,  # 前(head)
@@ -95,22 +98,21 @@ def Disk_solve(TCP, keys, degree, spin=1, printing=True):
 		print('str', wheel_stright)
 	if len(keys) == 2 or len(keys) == 4 or len(keys) == 5:
 		wheel_spin = wheel_stright[-1]
-	
-	if len(keys) == 3:
+	elif len(keys) == 3:
 		for i in range(0, 4):
 			wheel_spin[i] = (wheel_stright[1][i] + wheel_stright[2][i]) / 2
 	#print(wheel_spin)
 	# spin
 	if printing:
 		print('sp', wheel_spin)
-	wheel_spin[0] = (wheel_spin[0] + 1) / 2
-	wheel_spin[1] = (wheel_spin[1] - 1) / 2
-	wheel_spin[2] = (wheel_spin[2] + 1) / 2
-	wheel_spin[3] = (wheel_spin[3] - 1) / 2
+	wheel_spin[0] = (wheel_spin[0] * speed_disk + 1 * speed_spin) / 2
+	wheel_spin[1] = (wheel_spin[1] * speed_disk - 1 * speed_spin) / 2
+	wheel_spin[2] = (wheel_spin[2] * speed_disk + 1 * speed_spin) / 2
+	wheel_spin[3] = (wheel_spin[3] * speed_disk - 1 * speed_spin) / 2
 	
 	return wheel_spin
 
-speed = 30
+speed = 10
 
 def move(TCP, wheel, printing=True):
 	wheel = [i * 1000 / 100 * speed for i in wheel]
