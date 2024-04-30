@@ -17,8 +17,8 @@ def Stright_Solve(TCP, degree, keys, printing=True):
 	wheel2 = [0, 0,  # 前(head)
 	         0, 0]  # 后(tail)
 	#print(degree)
-	if abs(degree) >= 25:
-		kp = 0.01
+	if abs(degree) >= 5:
+		kp = 0.1
 		wheel2[0] = degree * kp
 		wheel2[1] = 0 - degree * kp
 		wheel2[2] = degree * kp
