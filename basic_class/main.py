@@ -57,10 +57,10 @@ def chassis_controll():
 				wait -= 1
 			#print(msg_solved["keys"], "---", wait)
 			if "M" in msg_solved["keys"] and wait == 0:
-				print(msg_solved["keys"], "---", wait)
+				#print(msg_solved["keys"], "---", wait)
 				disk_mode = not disk_mode
 				wait = 10
-				print("mode_change")
+				#print("mode_change")
 				if not disk_mode:
 					pass
 			#print(msg_solved)
