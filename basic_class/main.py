@@ -45,7 +45,7 @@ def chassis_controll():
 	#for i in range(1, 50):
 	disk_mode = False
 	wait = 0
-	TCP.IN_OUT("robot mode gimbal_lead;", printing=True)
+	TCP.IN_OUT("robot mode free;", printing=True)
 	while True:
 		#time.sleep(0.1)
 		msg = UDP.try_get(timeout=1,printing=False)
@@ -68,7 +68,8 @@ def chassis_controll():
 				degree = solve.solve_gimbal(TCP.IN_OUT("gimbal attitude ?;",printing=False),printing=False)
 				wheel_output = Chassis_Solve.Disk_solve(TCP,msg_solved["keys"],degree[1],printing = False)
 			elif not disk_mode:
-				wheel_output = Chassis_Solve.Stright_Solve(TCP,msg_solved["keys"],printing = False)
+				degree = TCP.IN_OUT("gimbal attitude ?;",printing=False)
+				wheel_output = Chassis_Solve.Stright_Solve(TCP,degree,msg_solved["keys"],printing = False)
 			Chassis_Solve.move(TCP,wheel_output,printing = False)
 	UDP.disconnect()
 	TCP.disconnect()

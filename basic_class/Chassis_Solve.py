@@ -6,13 +6,17 @@ backward_speed = 50
 side_speed = 50
 
 
-def Stright_Solve(TCP, keys, printing=True):
+def Stright_Solve(TCP, degree, keys, printing=True):
 	# SDK_.IN_OUT("gimbal recenter;")
 	#TCP.IN_OUT("robot mode free;", printing=printing)
 	result = []
 	# 对应    左右
 	wheel = [0, 0,  # 前(head)
 	         0, 0]  # 后(tail)
+	wheel[0] = degree * 0.1
+	wheel[1] = -degree * 0.1
+	wheel[2] = degree * 0.1
+	wheel[3] = -degree * 0.1
 	if 'W' in keys:
 		wheel = [(i + 1) for i in wheel]
 	if 'A' in keys:
