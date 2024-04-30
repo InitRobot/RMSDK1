@@ -13,7 +13,7 @@ def Stright_Solve(TCP, degree, keys, printing=True):
 	# 对应    左右
 	wheel = [0, 0,  # 前(head)
 	         0, 0]  # 后(tail)
-	kp = 0.0001
+	kp = 0.00001
 	wheel[0] = degree * kp
 	wheel[1] = 0 - degree * kp
 	wheel[2] = degree * kp
