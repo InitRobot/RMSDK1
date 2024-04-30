@@ -14,9 +14,9 @@ def Stright_Solve(TCP, degree, keys, printing=True):
 	wheel = [0, 0,  # 前(head)
 	         0, 0]  # 后(tail)
 	wheel[0] = degree * 0.1
-	wheel[1] = -degree * 0.1
+	wheel[1] = 0 - degree * 0.1
 	wheel[2] = degree * 0.1
-	wheel[3] = -degree * 0.1
+	wheel[3] = 0 - degree * 0.1
 	if 'W' in keys:
 		wheel = [(i + 1) for i in wheel]
 	if 'A' in keys:

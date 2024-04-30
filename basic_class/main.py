@@ -69,7 +69,7 @@ def chassis_controll():
 				wheel_output = Chassis_Solve.Disk_solve(TCP,msg_solved["keys"],degree[1],printing = False)
 			elif not disk_mode:
 				degree = solve.solve_gimbal(TCP.IN_OUT("gimbal attitude ?;",printing=False),printing=False)
-				wheel_output = Chassis_Solve.Stright_Solve(TCP,degree,msg_solved["keys"],printing = False)
+				wheel_output = Chassis_Solve.Stright_Solve(TCP,degree[1],msg_solved["keys"],printing = False)
 			Chassis_Solve.move(TCP,wheel_output,printing = False)
 	UDP.disconnect()
 	TCP.disconnect()
