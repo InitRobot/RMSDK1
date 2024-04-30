@@ -13,11 +13,13 @@ def Stright_Solve(TCP, degree, keys, printing=True):
 	# 对应    左右
 	wheel = [0, 0,  # 前(head)
 	         0, 0]  # 后(tail)
-	kp = 0.00001
-	wheel[0] = degree * kp
-	wheel[1] = 0 - degree * kp
-	wheel[2] = degree * kp
-	wheel[3] = 0 - degree * kp
+	print(degree)
+	if degree >= 10:
+		kp = 0.00001
+		wheel[0] = degree * kp
+		wheel[1] = 0 - degree * kp
+		wheel[2] = degree * kp
+		wheel[3] = 0 - degree * kp
 	if 'W' in keys:
 		wheel = [(i + 1) for i in wheel]
 	if 'A' in keys:
