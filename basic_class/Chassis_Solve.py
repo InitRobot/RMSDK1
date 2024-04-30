@@ -42,6 +42,8 @@ def Stright_Solve(TCP, degree, keys, printing=True):
 			wheel[i] = 1 + wheel2[i]
 		elif wheel[i] < 0:
 			wheel[i] = -1 + wheel2[i]
+		else:
+			wheel[i] = wheel2[i]
 	if printing:
 		print(wheel)
 	result = wheel
