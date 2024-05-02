@@ -36,15 +36,10 @@ class RobotLiveview(object):
         self.video_decoder = libh264decoder.H264Decoder()
         libh264decoder.disable_logging()
 
-        self.audio_decoder = opus_decoder.opus_decoder() 
 
         self.video_decoder_thread = threading.Thread(target=self._video_decoder_task)
         self.video_decoder_msg_queue = queue.Queue(64)
         self.video_display_thread = threading.Thread(target=self._video_display_task)
-
-        self.audio_decoder_thread = threading.Thread(target=self._audio_decoder_task)
-        self.audio_decoder_msg_queue = queue.Queue(32)
-        self.audio_display_thread = threading.Thread(target=self._audio_display_task)
 
         self.command_ack_list = []
 
@@ -68,14 +63,10 @@ class RobotLiveview(object):
         self.is_shutdown = True
         self.video_decoder_thread.join()
         self.video_display_thread.join()
-        self.audio_decoder_thread.join()
-        self.audio_display_thread.join()
         self.connection.close()
 
     def display(self):
         self.command('command')
-        time.sleep(1)
-        self.command('audio on')
         time.sleep(1)
         self.command('stream on')
         time.sleep(1)
@@ -84,9 +75,6 @@ class RobotLiveview(object):
         self.video_decoder_thread.start()
         self.video_display_thread.start()
 
-        self.audio_decoder_thread.start()
-        self.audio_display_thread.start()
-
         print('display!')
 
     def command(self, msg):
@@ -94,7 +82,7 @@ class RobotLiveview(object):
         #       CHECK THE ACK AND SEQ
         self.connection.send_data(msg)
 
-    def _h264_decode(self, packet_data):
+    def _h264_decode(self, packet_data):#主要在这里decode   <----
         res_frame_list = []
         frames = self.video_decoder.decode(packet_data)
         for framedata in frames:
@@ -132,7 +120,7 @@ class RobotLiveview(object):
     def _video_display_task(self):
         while not self.is_shutdown: 
             try:
-                frame = self.video_decoder_msg_queue.get(timeout=2)
+                frame = self.video_decoder_msg_queue.end(timeout=2)
             except Exception as e:
                 if self.is_shutdown:
                     break
@@ -143,50 +131,6 @@ class RobotLiveview(object):
             cv2.imshow("Liveview", img)
             cv2.waitKey(1)
 
-    def _audio_decoder_task(self):
-        package_data = b''
-
-        self.connection.start_audio_recv()
-
-        while not self.is_shutdown: 
-            buff = self.connection.recv_audio_data()
-            if buff:
-                package_data += buff
-                if len(package_data) != 0:
-                    output = self.audio_decoder.decode(package_data)
-                    if output:
-                        try:
-                            self.audio_decoder_msg_queue.put(output, timeout=2)
-                        except Exception as e:
-                            if self.is_shutdown:
-                                break
-                            print('audio decoder queue full')
-                            continue
-                    package_data=b''
-
-        self.connection.stop_audio_recv()
-
-    def _audio_display_task(self):
-
-        p = pyaudio.PyAudio()
-
-        stream = p.open(format=pyaudio.paInt16,
-                        channels=1,
-                        rate=48000,
-                        output=True)
-
-        while not self.is_shutdown: 
-            try:
-                output = self.audio_decoder_msg_queue.get(timeout=2)
-            except Exception as e:
-                if self.is_shutdown:
-                    break
-                print('audio decoder queue empty')
-                continue
-            stream.write(output)
-
-        stream.stop_stream()
-        stream.close()
 
 
 def test():
