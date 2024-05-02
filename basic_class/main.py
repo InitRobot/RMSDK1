@@ -2,6 +2,7 @@ import connect
 import solve
 import Chassis_Solve
 import time
+import os
 #import auto_aim
 
 def example():
@@ -67,11 +68,12 @@ def chassis_controll():
 				if not disk_mode:
 					pass
 			#print(msg_solved)
-			"""
+			
 			if "E" in msg_solved["keys"]:
 				print("E:auto_aim")
-				auto_aim.auto_aim()
-			"""
+				#auto_aim.auto_aim()
+				os.system('cd ~/RM-yolo/RMSDK && python3 06_final.py')
+			
 			if disk_mode:
 				degree = solve.solve_gimbal(TCP.IN_OUT("gimbal attitude ?;",printing=False),printing=False)
 				wheel_output = Chassis_Solve.Disk_solve(TCP,msg_solved["keys"],degree[1],printing = False)
