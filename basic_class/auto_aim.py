@@ -31,7 +31,7 @@ def auto_aim():
     for r in results:
         boxes = r.boxes
 
-     pos = boxes.xywh
+    pos = boxes.xywh
     pos = str(pos)
 
     pos_arr = []
