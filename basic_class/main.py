@@ -3,7 +3,7 @@ import solve
 import Chassis_Solve
 import time
 import os
-#import auto_aim
+import auto_aim
 
 def example():
 	"""
@@ -48,7 +48,7 @@ def chassis_controll():
 	disk_mode = False
 	wait = 0
 	TCP.IN_OUT("robot mode free;", printing=True)
-	#auto_aim.connect()
+	auto_aim.connect()
 	print("connected")
 	while True:
 		#time.sleep(0.1)
@@ -71,8 +71,8 @@ def chassis_controll():
 			
 			if "E" in msg_solved["keys"]:
 				print("E:auto_aim")
-				#auto_aim.auto_aim()
-				os.system('cd ~/RM-yolo/RMSDK && python3 06_final.py')
+				auto_aim.auto_aim()
+				#os.system('cd ~/RM-yolo/RMSDK && python3 06_final.py')
 			
 			if disk_mode:
 				degree = solve.solve_gimbal(TCP.IN_OUT("gimbal attitude ?;",printing=False),printing=False)
