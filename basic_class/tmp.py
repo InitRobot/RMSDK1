@@ -116,7 +116,7 @@ class RobotLiveview(object):
                             print('video decoder queue full')
                             continue
                     package_data=b''
-
+        print("end")
         self.connection.stop_video_recv()
 
     def _video_display_task(self):
