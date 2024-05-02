@@ -122,7 +122,7 @@ class RobotLiveview(object):
     def _video_display_task(self):
         while not self.is_shutdown: 
             try:
-                frame = self.video_decoder_msg_queue.end(timeout=2)
+                frame = self.video_decoder_msg_queue.get(timeout=2)
             except Exception as e:
                 if self.is_shutdown:
                     break
