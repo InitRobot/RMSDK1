@@ -48,6 +48,7 @@ def chassis_controll():
 	wait = 0
 	TCP.IN_OUT("robot mode free;", printing=True)
 	auto_aim.connect()
+	print("connected")
 	while True:
 		#time.sleep(0.1)
 		msg = UDP.try_get(timeout=1,printing=False)
@@ -62,11 +63,12 @@ def chassis_controll():
 				#print(msg_solved["keys"], "---", wait)
 				disk_mode = not disk_mode
 				wait = 10
-				#print("mode_change")
+				print("mode_change")
 				if not disk_mode:
 					pass
 			#print(msg_solved)
 			if "E" in msg_solved["keys"]:
+				print("E:auto_aim")
 				auto_aim.auto_aim()
 			if disk_mode:
 				degree = solve.solve_gimbal(TCP.IN_OUT("gimbal attitude ?;",printing=False),printing=False)
