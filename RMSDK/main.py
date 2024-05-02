@@ -36,6 +36,6 @@ def sub_data_handler(sub_info):
 if __name__ == '__main__':
     ep = robot.Robot()
     ep.initialize(conn_type="rndis")
-    ep.chassis.stick_overlay(1)
+    #ep.chassis.stick_overlay(1)
     ep.set_robot_mode(mode=robot.GIMBAL_LEAD)
     ep.sub_game_msg(callback=sub_data_handler)
