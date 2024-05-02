@@ -15,7 +15,7 @@ def connect():
     ep_gimbal = ep_robot.gimbal
     ep_blaster = ep_robot.blaster
     ep_camera = ep_robot.camera
-    ep_camera.start_video_stream(display=False, resolution='360p')
+    #ep_camera.start_video_stream(display=False, resolution='360p')
 
 def disconnect():
     cv2.destroyAllWindows()
