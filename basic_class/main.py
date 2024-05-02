@@ -2,6 +2,7 @@ import connect
 import solve
 import Chassis_Solve
 import time
+import auto_aim
 
 def example():
 	"""
@@ -46,6 +47,7 @@ def chassis_controll():
 	disk_mode = False
 	wait = 0
 	TCP.IN_OUT("robot mode free;", printing=True)
+	auto_aim.connect()
 	while True:
 		#time.sleep(0.1)
 		msg = UDP.try_get(timeout=1,printing=False)
@@ -64,6 +66,8 @@ def chassis_controll():
 				if not disk_mode:
 					pass
 			#print(msg_solved)
+			if "E" in msg_solved["keys"]:
+				auto_aim.auto_aim()
 			if disk_mode:
 				degree = solve.solve_gimbal(TCP.IN_OUT("gimbal attitude ?;",printing=False),printing=False)
 				wheel_output = Chassis_Solve.Disk_solve(TCP,msg_solved["keys"],degree[1],printing = False)
