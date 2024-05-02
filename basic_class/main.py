@@ -52,7 +52,7 @@ def chassis_controll():
 	while True:
 		#time.sleep(0.1)
 		msg = UDP.try_get(timeout=1,printing=False)
-		#print(msg)
+		print(msg)
 		#print(msg)
 		if msg != "no_OUT":
 			msg_solved = solve.solve_game_msg(msg,printing=False)

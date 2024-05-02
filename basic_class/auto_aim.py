@@ -9,12 +9,12 @@ import time
 model = YOLO('../../RM-yolo/runs/best.pt')
 #路径需修改
 
+ep_robot = robot.Robot()
+ep_gimbal = ep_robot.gimbal
+ep_blaster = ep_robot.blaster
+ep_camera = ep_robot.camera
 def connect():
-    ep_robot = robot.Robot()
     ep_robot.initialize(conn_type="rndis")
-    ep_gimbal = ep_robot.gimbal
-    ep_blaster = ep_robot.blaster
-    ep_camera = ep_robot.camera
     ep_camera.start_video_stream(display=False, resolution='360p')
 
 def disconnect():
