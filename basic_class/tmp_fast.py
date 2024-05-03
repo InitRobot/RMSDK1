@@ -99,15 +99,17 @@ class RobotLiveview(object):
         package_data = b''
 
         self.connection.start_video_recv()
-
+        i = 0
         while not self.is_shutdown: 
+            i += 1
             buff = self.connection.recv_video_data()
             #print(buff)
             if buff:
-                print("1")
+                print(i % 10)
                 package_data += buff
                 if len(buff) != 1460:
                     for frame in self._h264_decode(package_data):
+                        print("show")
                         image = PImage.fromarray(frame)
                         img = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
                         cv2.imshow("Liveview", img)
