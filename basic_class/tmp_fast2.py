@@ -38,7 +38,7 @@ class RobotLiveview(object):
 
 
         self.video_decoder_thread = threading.Thread(target=self._video_decoder_task)
-        self.video_decoder_msg_queue = queue.LifoQueue(64)
+        self.video_decoder_msg_queue = queue.Queue(64)
         self.video_display_thread = threading.Thread(target=self._video_display_task)
 
         self.command_ack_list = []
@@ -115,6 +115,8 @@ class RobotLiveview(object):
                                 break
                             print('video decoder queue full')
                             continue
+                        if self.video_decoder_msg_queue.qsize() >= 3:
+                            self.video_decoder_msg_queue.get(timeout=2)
                     package_data=b''
         #print("end")
         self.connection.stop_video_recv()
