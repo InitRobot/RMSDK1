@@ -96,6 +96,7 @@ def video_test():
 	UDP.connect(printing=True)
 	#TCP_video.connect(printing=True)
 	TCP.IN_OUT("game_msg on;",printing=True)
+	TCP.IN_OUT("stream on;",printing=True)
 	#robot.open()
 	#robot.display()
 	tmp_fast2.test()
