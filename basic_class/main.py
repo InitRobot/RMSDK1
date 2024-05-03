@@ -97,8 +97,8 @@ def video_test():
 	TCP_video.connect(printing=True)
 	TCP.IN_OUT("game_msg on;",printing=True)
 	TCP.IN_OUT("stream on;",printing=True)
-	#robot.open()
-	#robot.display()
+	robot = RobotLiveview.RobotLiveview()
+	robot.display()
 	#tmp_fast2.test()
 
 if __name__ == '__main__':
