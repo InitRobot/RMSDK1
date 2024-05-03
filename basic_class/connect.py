@@ -156,3 +156,46 @@ class UDP_connection:
 		
 		return result
 
+class TCP_video:
+	host = "192.168.42.2"
+	port = 40923
+	printing = True
+	connection = False
+
+	def __init__(self, printing=True):
+		self.printing = printing
+	
+	def connect(self, printing=True):  # 与机器人控制命令端口建立 TCP 连接
+		self.address = (self.host, int(self.port))
+		self.TCP_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		if self.printing or printing:
+			print("Connecting_TCP_video...")
+		
+		self.TCP_socket.connect(self.address)
+		self.connection = True
+		if self.printing or printing:
+			print("TCP_video_Connected!")
+	
+	"""
+        Receive control data
+
+        If optional arg 'timeout' is None (the default), block if necessary until
+        get data from control port. If 'timeout' is a non-negative number,
+        it blocks at most 'timeout' seconds and reuturn None if no data back from
+        robot video port within the time. Otherwise, return the data immediately.
+ 
+        If optional arg 'latest_data' is set to True, it will return the latest
+        data, instead of the data in queue tail.
+
+        """
+	def recv_video_data(self, timeout=None, latest_data=False):
+		return self.__recv_data(self.TCP_socket, timeout, latest_data)
+	
+	def __recv_data(self, socket_obj, timeout, latest_data):
+		msg = None
+		try:
+			msg = self.queue.Queue(32).get(timeout=timeout)
+		except Exception as e:
+				return None
+		else:
+			return msg

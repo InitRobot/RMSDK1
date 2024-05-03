@@ -85,6 +85,16 @@ def chassis_controll():
 	UDP.disconnect()
 	TCP.disconnect()
 
+def video_test():
+	print("start")
+	TCP = connect.TCP_connection(printing=False)
+	TCP_video = connect.TCP_video(printing=False)
+	UDP = connect.UDP_connection(printing=False)
+	TCP.connect_enter_SDK(printing=False)
+	UDP.connect(printing=False)
+	TCP_video.connect(printing=False)
+	TCP.IN_OUT("game_msg on;",printing=False)
 
 if __name__ == '__main__':
-	chassis_controll()
+	#chassis_controll()
+	video_test()
