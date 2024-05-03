@@ -21,8 +21,8 @@ import connect
 class RobotLiveview(object):
     USB_DIRECT_IP = '192.168.42.2'
         
-    def __init__(self):
-        self.connection = robot_connection.RobotConnection()
+    def __init__(self, TCP):
+        self.connection = TCP
 
         self.video_decoder = libh264decoder.H264Decoder()
         libh264decoder.disable_logging()
@@ -35,13 +35,6 @@ class RobotLiveview(object):
         self.command_ack_list = []
 
         self.is_shutdown = True
-
-        
-    def close(self):
-        self.is_shutdown = True
-        self.video_decoder_thread.join()
-        self.video_display_thread.join()
-        self.connection.close()
 
     def display(self):
         self.command('command;')
@@ -74,8 +67,6 @@ class RobotLiveview(object):
     def _video_decoder_task(self):#decode线程
         package_data = b''
 
-        self.connection.start_video_recv()
-
         while not self.is_shutdown: 
             buff = self.connection.recv_video_data()
             #print(buff)
@@ -96,7 +87,6 @@ class RobotLiveview(object):
                         print("queuesize:",self.video_decoder_msg_queue.qsize())
                     package_data=b''
         #print("end")
-        self.connection.stop_video_recv()
 
     def _video_display_task(self):#display线程
         while not self.is_shutdown: 
