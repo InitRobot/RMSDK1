@@ -38,7 +38,7 @@ class RobotLiveview(object):
 
 
         self.video_decoder_thread = threading.Thread(target=self._video_decoder_task)
-        self.video_decoder_msg_queue = queue.Queue(2)
+        self.video_decoder_msg_queue = queue.Queue(5)
         #self.video_display_thread = threading.Thread(target=self._video_display_task)
 
         self.command_ack_list = []
@@ -108,13 +108,17 @@ class RobotLiveview(object):
                 package_data += buff
                 if len(buff) != 1460:
                     for frame in self._h264_decode(package_data):
-                        try:
+                        image = PImage.fromarray(frame)
+                        img = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+                        cv2.imshow("Liveview", img)
+                        cv2.waitKey(1)
+                        """try:
                             self.video_decoder_msg_queue.put(frame, timeout=2)
                         except Exception as e:
                             if self.is_shutdown:
                                 break
                             print('video decoder queue full')
-                            continue
+                            continue"""
                     package_data=b''
         #print("end")
         self.connection.stop_video_recv()
