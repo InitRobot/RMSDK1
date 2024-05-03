@@ -102,7 +102,7 @@ class RobotLiveview(object):
         i = 0
         while not self.is_shutdown: 
             i += 1
-            buff = self.connection.recv_video_data()
+            buff = self.connection.recv_video_data(latest_data=True)
             #print(buff)
             if buff:
                 print(i % 10)
