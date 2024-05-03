@@ -109,14 +109,14 @@ class RobotLiveview(object):
                 if len(buff) != 1460:
                     for frame in self._h264_decode(package_data):
                         try:
-                            self.video_decoder_msg_queue.put(frame, timeout=2)
+                            self.video_decoder_msg_queue.put(frame, timeout=1)
                         except Exception as e:
                             if self.is_shutdown:
                                 break
                             print('video decoder queue full')
                             continue
                         if self.video_decoder_msg_queue.qsize() >= 3:
-                            self.video_decoder_msg_queue.get(timeout=2)
+                            self.video_decoder_msg_queue.get(timeout=1)
                         print("queuesize:",self.video_decoder_msg_queue.qsize())
                     package_data=b''
         #print("end")
@@ -125,7 +125,7 @@ class RobotLiveview(object):
     def _video_display_task(self):#display线程
         while not self.is_shutdown: 
             try:
-                frame = self.video_decoder_msg_queue.get(timeout=2)
+                frame = self.video_decoder_msg_queue.get(timeout=1)
             except Exception as e:
                 if self.is_shutdown:
                     break
