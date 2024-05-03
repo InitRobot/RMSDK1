@@ -4,7 +4,8 @@ import Chassis_Solve
 import time
 import os
 import auto_aim
-import RobotLiveview
+#import RobotLiveview
+import tmp_fast2
 
 def example():
 	"""
@@ -89,14 +90,15 @@ def chassis_controll():
 def video_test():
 	print("start")
 	TCP = connect.TCP_connection(printing=True)
-	TCP_video = connect.TCP_video(printing=True)
+	#TCP_video = connect.TCP_video(printing=True)
 	UDP = connect.UDP_connection(printing=True)
 	TCP.connect_enter_SDK(printing=True)
 	UDP.connect(printing=True)
-	TCP_video.connect(printing=True)
+	#TCP_video.connect(printing=True)
 	TCP.IN_OUT("game_msg on;",printing=True)
-	robot.open()
-	robot.display()
+	#robot.open()
+	#robot.display()
+	tmp_fast2.test()
 
 if __name__ == '__main__':
 	#chassis_controll()
