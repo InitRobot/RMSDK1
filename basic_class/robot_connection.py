@@ -23,19 +23,19 @@ class RobotConnection(object):
         self.video_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.audio_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.ctrl_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.push_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        #self.push_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.event_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.ip_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-        self.push_socket.bind(('', RobotConnection.PUSH_PORT))
+        #self.push_socket.bind(('', RobotConnection.PUSH_PORT))
         self.ip_socket.bind(('', RobotConnection.IP_PORT))
 
-        self.cmd_socket_list = [self.ctrl_socket, self.push_socket, self.event_socket]
+        self.cmd_socket_list = [self.ctrl_socket, self.event_socket]
         self.cmd_socket_msg_queue = {
             self.video_socket: queue.Queue(32),
             self.audio_socket: queue.Queue(32),
             self.ctrl_socket: queue.Queue(16),
-            self.push_socket: queue.Queue(16),
+            
             self.event_socket: queue.Queue(16)
         }
         self.cmd_socket_recv_thread = threading.Thread(target=self.__socket_recv_task)
@@ -184,7 +184,7 @@ class RobotConnection(object):
         """
         return self.__recv_data(self.ctrl_socket, timeout, latest_data)
 
-    def recv_push_data(self, timeout=None, latest_data=False):
+'''    def recv_push_data(self, timeout=None, latest_data=False):
         """
         Receive push data
 
@@ -197,7 +197,7 @@ class RobotConnection(object):
         data, instead of the data in queue tail.
         """
         return self.__recv_data(self.push_socket, timeout, latest_data)
-
+'''
     def recv_event_data(self, timeout=None, latest_data=False):
         """
         Receive event data
