@@ -103,9 +103,9 @@ class RobotLiveview(object):
         while not self.is_shutdown: 
             i += 1
             buff = self.connection.recv_video_data(latest_data=True)
-            #print(buff)
+            print(buff)
             if buff:
-                print(len(buff))
+                #print(len(buff))
                 package_data += buff
 
                 for frame in self._h264_decode(package_data):
@@ -113,7 +113,7 @@ class RobotLiveview(object):
                     image = PImage.fromarray(frame)
                     img = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
                     cv2.imshow("Liveview", img)
-                    #cv2.waitKey(1)
+                    cv2.waitKey(1)
                     """try:
                         self.video_decoder_msg_queue.put(frame, timeout=2)
                     except Exception as e:
