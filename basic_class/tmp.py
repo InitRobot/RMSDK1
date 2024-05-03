@@ -49,7 +49,7 @@ class RobotLiveview(object):
         if self.connection_type is ConnectionType.WIFI_DIRECT:
             self.connection.update_robot_ip(RobotLiveview.WIFI_DIRECT_IP)
         elif self.connection_type is ConnectionType.USB_DIRECT:
-            self.connection.update_robot_ip(RobotLiveview.USB_DIRECT_IP)
+            self.connection.update_robot_ip(RobotLiveview.USB_DIRECT_IP)        # usb连接
         elif self.connection_type is ConnectionType.WIFI_NETWORKING:
             robot_ip = self.connection.get_robot_ip(timeout=10)  
             if robot_ip:
@@ -70,9 +70,9 @@ class RobotLiveview(object):
         time.sleep(1)
         self.command('stream on')
         time.sleep(1)
-        self.command('stream on')
+        self.command('stream on')   #以上连接并开启了视频流获取
 
-        self.video_decoder_thread.start()
+        self.video_decoder_thread.start()#开启两个线程
         self.video_display_thread.start()
 
         print('display!')
@@ -95,14 +95,14 @@ class RobotLiveview(object):
 
         return res_frame_list
 
-    def _video_decoder_task(self):
+    def _video_decoder_task(self):#decode线程
         package_data = b''
 
         self.connection.start_video_recv()
 
         while not self.is_shutdown: 
             buff = self.connection.recv_video_data()
-            print(buff)
+            #print(buff)
             if buff:
                 print("1")
                 package_data += buff
@@ -116,10 +116,10 @@ class RobotLiveview(object):
                             print('video decoder queue full')
                             continue
                     package_data=b''
-        print("end")
+        #print("end")
         self.connection.stop_video_recv()
 
-    def _video_display_task(self):
+    def _video_display_task(self):#display线程
         while not self.is_shutdown: 
             try:
                 frame = self.video_decoder_msg_queue.get(timeout=2)
