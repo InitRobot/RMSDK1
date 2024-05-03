@@ -193,3 +193,4 @@ TCP.disconnect()
     - 16:35 发现RMSDK没有赛事数据推送到文档，有BUG，放弃
 - 20240503
     - 13:11 试图优化视频流
+    - 16:32 实现延时在3秒左右的视频流，发现无法作为库来调![image-20240503163414848](C:\Users\Victor\AppData\Roaming\Typora\typora-user-images\image-20240503163414848.png)
