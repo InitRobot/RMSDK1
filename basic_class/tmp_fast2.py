@@ -151,6 +151,7 @@ def test():
     robot.open()
     robot.display()
 
-
+'''
 if __name__ == '__main__':
     test()
+'''
