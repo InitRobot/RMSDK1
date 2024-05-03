@@ -105,7 +105,7 @@ class RobotLiveview(object):
             buff = self.connection.recv_video_data(latest_data=True)
             #print(buff)
             if buff:
-                print(i % 10)
+                print(len(buff))
                 package_data += buff
                 if len(buff) != 1460:
                     for frame in self._h264_decode(package_data):
