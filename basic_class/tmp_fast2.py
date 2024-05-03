@@ -117,6 +117,7 @@ class RobotLiveview(object):
                             continue
                         if self.video_decoder_msg_queue.qsize() >= 3:
                             self.video_decoder_msg_queue.get(timeout=2)
+                        print("queuesize:",self.video_decoder_msg_queue.qsize())
                     package_data=b''
         #print("end")
         self.connection.stop_video_recv()
