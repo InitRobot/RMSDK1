@@ -1,17 +1,17 @@
 #!python3
 
 import sys
-sys.path.append('../decoder/ubuntu/output/')
-sys.path.append('../../connection/network/')
+#sys.path.append('../decoder/ubuntu/output/')
+#sys.path.append('../../connection/network/')
 
 import threading
 import time
 import numpy as np
-#import libh264decoder
+import libh264decoder
 import signal
 from PIL import Image as PImage
 import cv2
-#import opus_decoder
+import opus_decoder
 import pyaudio
 #import robot_connection
 import enum
