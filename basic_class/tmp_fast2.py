@@ -38,7 +38,7 @@ class RobotLiveview(object):
 
 
         self.video_decoder_thread = threading.Thread(target=self._video_decoder_task)
-        self.video_decoder_msg_queue = queue.LifoQueue(5)
+        self.video_decoder_msg_queue = queue.LifoQueue(64)
         self.video_display_thread = threading.Thread(target=self._video_display_task)
 
         self.command_ack_list = []
