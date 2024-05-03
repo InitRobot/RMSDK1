@@ -107,21 +107,21 @@ class RobotLiveview(object):
             if buff:
                 print(len(buff))
                 package_data += buff
-                if len(buff) != 1460:
-                    for frame in self._h264_decode(package_data):
-                        print("show")
-                        image = PImage.fromarray(frame)
-                        img = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
-                        cv2.imshow("Liveview", img)
-                        cv2.waitKey(1)
-                        """try:
-                            self.video_decoder_msg_queue.put(frame, timeout=2)
-                        except Exception as e:
-                            if self.is_shutdown:
-                                break
-                            print('video decoder queue full')
-                            continue"""
-                    package_data=b''
+
+                for frame in self._h264_decode(package_data):
+                    print("show")
+                    image = PImage.fromarray(frame)
+                    img = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+                    cv2.imshow("Liveview", img)
+                    cv2.waitKey(1)
+                    """try:
+                        self.video_decoder_msg_queue.put(frame, timeout=2)
+                    except Exception as e:
+                         if self.is_shutdown:
+                            break
+                        print('video decoder queue full')
+                        continue"""
+                package_data=b''
         #print("end")
         self.connection.stop_video_recv()
 
