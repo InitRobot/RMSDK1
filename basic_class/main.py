@@ -95,8 +95,8 @@ def video_test():
 	UDP.connect(printing=True)
 	TCP_video.connect(printing=True)
 	TCP.IN_OUT("game_msg on;",printing=True)
-    robot.open()
-    robot.display()
+	robot.open()
+	robot.display()
 
 if __name__ == '__main__':
 	#chassis_controll()
