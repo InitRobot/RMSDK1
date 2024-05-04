@@ -196,3 +196,4 @@ TCP.disconnect()
     - 16:32 实现延时在3秒左右的视频流，发现无法作为库来调![image-20240503163414848](C:\Users\Victor\AppData\Roaming\Typora\typora-user-images\image-20240503163414848.png)
 - 20240504
     - 13:10 发现是因为导入auto_aim导致的
+    - 14:56 经过研究不知道为啥TCP_video连不上，决定使用官方的robot_connect
