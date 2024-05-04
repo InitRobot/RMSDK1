@@ -36,12 +36,12 @@ class RobotLiveview(object):
 
         self.is_shutdown = True
 
-    def display(self):
-        self.command('command;')
+    def display(self, TCP):
+        self.command('command;', TCP)
         time.sleep(1)
-        self.command('stream on;')
+        self.command('stream on;', TCP)
         time.sleep(1)
-        self.command('stream on;')   #以上连接并开启了视频流获取
+        self.command('stream on;', TCP)   #以上连接并开启了视频流获取
 
         self.video_decoder_thread.start()#开启两个线程
         self.video_display_thread.start()

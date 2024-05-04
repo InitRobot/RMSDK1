@@ -98,6 +98,7 @@ def video_test():
 	TCP.IN_OUT("game_msg on;",printing=True)
 	TCP.IN_OUT("stream on;",printing=True)
 	robot = RobotLiveview.RobotLiveview(TCP_video)
+	print("connected view")
 	robot.display()
 	#tmp_fast2.test()
 
