@@ -171,7 +171,11 @@ class TCP_video:
 		if self.printing or printing:
 			print("Connecting_TCP_video...")
 		
-		self.TCP_socket.connect(self.address)
+		#self.TCP_socket.connect(self.address)
+		try:
+            self.TCP_socket.connect((host, port))
+        except Exception as e:
+            print('Connection failed, the reason is %s'%e)
 		self.connection = True
 		if self.printing or printing:
 			print("TCP_video_Connected!")
