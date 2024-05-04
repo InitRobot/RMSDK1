@@ -99,7 +99,7 @@ def video_test():
 	TCP.IN_OUT("stream on;",printing=True)
 	robot = RobotLiveview.RobotLiveview(TCP_video)
 	print("connected view")
-	robot.display(TCP_video)
+	robot.display(TCP)
 	#tmp_fast2.test()
 
 if __name__ == '__main__':
