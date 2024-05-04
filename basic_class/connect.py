@@ -211,7 +211,7 @@ class TCP_video:
 			return msg
 
 	def __socket_recv_task(self):
-		while not self.is_shutdown:
+		while True:
 			rlist, _, _  = select.select([self.TCP_socket], [], [], 2)
 			for s in rlist:
 				msg, addr = s.recvfrom(4096)
