@@ -143,7 +143,7 @@ def test():
     robot = RobotLiveview(ConnectionType.USB_DIRECT)
 
 
-#------结束
+    #------结束
     def exit(signum, frame):
         robot.close()
 
@@ -151,7 +151,7 @@ def test():
     signal.signal(signal.SIGTERM, exit)
 
 
-
+    print("open")
     #------开始
     robot.open()
     robot.display()

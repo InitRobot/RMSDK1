@@ -23,7 +23,7 @@ def example():
     print('recv data from robot : %s'%recv)
     while True:
         msg = robot.recv_push_data(5)
-        print(msg)
+        #print(msg)
         if msg:
             msg_solved = solve.solve_game_msg(msg,printing=False)
             print(msg_solved)
@@ -92,16 +92,26 @@ def chassis_controll():
 
 def video_test():
 	print("start")
-	TCP = connect.TCP_connection(printing=True)
-	TCP_video = connect.TCP_video(printing=True)
-	UDP = connect.UDP_connection(printing=True)
-	TCP.connect_enter_SDK(printing=True)
-	UDP.connect(printing=True)
-	TCP_video.connect(printing=True)
-	TCP.IN_OUT("game_msg on;",printing=True)
-	TCP.IN_OUT("stream on;",printing=True)
-	robot = RobotLiveview.RobotLiveview(TCP_video)
-	print("connected view")
+    robot = robot_connection.RobotConnection('192.168.42.2')
+    robot.open()
+    robot2 = RobotLiveview(ConnectionType.USB_DIRECT)
+    robot.send_data('command;')
+    print('send data to robot   : command')
+    recv = robot.recv_ctrl_data(5)
+    print('recv data from robot : %s'%recv)
+    
+    robot.send_data('game_msg on;')
+    print('send data to robot   : game_msg on')
+    recv = robot.recv_ctrl_data(5)
+    print('recv data from robot : %s'%recv)
+    while True:
+        msg = robot.recv_push_data(5)
+        #print(msg)
+        if msg:
+            msg_solved = solve.solve_game_msg(msg,printing=False)
+            print(msg_solved)
+    UDP.disconnect()
+    TCP.disconnect()
 	robot.display(TCP)
 	#tmp_fast2.test()
 	while True:
