@@ -7,11 +7,11 @@ sys.path.append('../../connection/network/')
 import threading
 import time
 import numpy as np
-#import libh264decoder
+import libh264decoder
 import signal
 from PIL import Image as PImage
 import cv2
-#import opus_decoder
+import opus_decoder
 import pyaudio
 import robot_connection
 import enum
@@ -142,12 +142,17 @@ def test():
 
     robot = RobotLiveview(ConnectionType.USB_DIRECT)
 
+
+#------结束
     def exit(signum, frame):
         robot.close()
 
     signal.signal(signal.SIGINT, exit)
     signal.signal(signal.SIGTERM, exit)
 
+
+
+    #------开始
     robot.open()
     robot.display()
 
