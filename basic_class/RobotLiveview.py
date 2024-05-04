@@ -68,9 +68,9 @@ class RobotLiveview(object):
         package_data = b''
 
         while not self.is_shutdown: 
-            print("try")
+            #print("try")
             buff = self.connection.recv_video_data()
-            #print(buff)
+            print(buff)
             if buff:
                 print("1")
                 package_data += buff
