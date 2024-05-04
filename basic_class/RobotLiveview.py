@@ -34,7 +34,7 @@ class RobotLiveview(object):
 
         self.command_ack_list = []
 
-        self.is_shutdown = True
+        self.is_shutdown = False
 
     def display(self, TCP):
         self.command('command;', TCP)
