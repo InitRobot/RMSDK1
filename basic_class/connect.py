@@ -179,7 +179,12 @@ class TCP_video:
 		self.connection = True
 		if self.printing or printing:
 			print("TCP_video_Connected!")
-	
+
+		self.cmd_socket_msg_queue = {
+            self.video_socket: queue.Queue(32)
+        }
+		self.cmd_socket_recv_thread = threading.Thread(target=self.__socket_recv_task)
+		self.cmd_socket_recv_thread.start() 	
 	"""
         Receive control data
 
@@ -203,3 +208,19 @@ class TCP_video:
 				return None
 		else:
 			return msg
+
+	def __socket_recv_task(self):
+        while not self.is_shutdown:
+            rlist, _, _  = select.select([self.TCP_socket], [], [], 2)
+
+            for s in rlist:
+                msg, addr = s.recvfrom(4096)
+                if self.cmd_socket_msg_queue[s].full():
+                    self.cmd_socket_msg_queue[s].get()
+                self.cmd_socket_msg_queue[s].put(msg)
+
+        for s in self.cmd_socket_list:
+            try:
+                s.shutdown(socket.SHUT_RDWR)
+            except Exception as e:
+                pass
