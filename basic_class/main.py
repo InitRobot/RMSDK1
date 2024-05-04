@@ -3,7 +3,7 @@ import solve
 import Chassis_Solve
 import time
 import os
-import auto_aim
+#import auto_aim
 import RobotLiveview
 #import tmp_fast2
 
