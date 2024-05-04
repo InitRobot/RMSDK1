@@ -23,7 +23,7 @@ def example():
     print('recv data from robot : %s'%recv)
     while True:
         msg = robot.recv_push_data(5)
-		#print(msg)
+		print(msg)
         if msg != "no_OUT":
             msg_solved = solve.solve_game_msg(msg,printing=False)
             print(msg_solved)
