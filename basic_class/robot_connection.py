@@ -183,33 +183,7 @@ class RobotConnection(object):
 
         """
         return self.__recv_data(self.ctrl_socket, timeout, latest_data)
-
-'''    def recv_push_data(self, timeout=None, latest_data=False):
-        """
-        Receive push data
-
-        If optional arg 'timeout' is None (the default), block if necessary until
-        get data from push port. If 'timeout' is a non-negative number,
-        it blocks at most 'timeout' seconds and reuturn None if no data back from
-        robot push port within the time. Otherwise, return the data immediately.
- 
-        If optional arg 'latest_data' is set to True, it will return the latest
-        data, instead of the data in queue tail.
-        """
-        return self.__recv_data(self.push_socket, timeout, latest_data)
-'''
     def recv_event_data(self, timeout=None, latest_data=False):
-        """
-        Receive event data
-
-        If optional arg 'timeout' is None (the default), block if necessary until
-        get data from event port. If 'timeout' is a non-negative number,
-        it blocks at most 'timeout' seconds and reuturn None if no data back from
-        robot event port within the time. Otherwise, return the data immediately.
- 
-        If optional arg 'latest_data' is set to True, it will return the latest
-        data, instead of the data in queue tail.
-        """
         return self.__recv_data(self.event_socket, timeout, latest_data)
 
     def __send_data(self, socket_obj, data):
