@@ -173,7 +173,7 @@ class TCP_video:
 			print("Connecting_TCP_video...")
 		
 		#self.TCP_socket.connect(self.address)
-		print(address)
+		print(self.address)
 		try:
 			self.TCP_socket.connect(self.address)
 		except Exception as e:
