@@ -101,6 +101,8 @@ def video_test():
 	print("connected view")
 	robot.display(TCP)
 	#tmp_fast2.test()
+	while True:
+		pass
 
 if __name__ == '__main__':
 	#chassis_controll()
