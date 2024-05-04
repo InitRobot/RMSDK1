@@ -16,7 +16,7 @@ import pyaudio
 import robot_connection
 import enum
 import queue
-import connect
+#import connect
 
 class RobotLiveview(object):
     USB_DIRECT_IP = '192.168.42.2'
