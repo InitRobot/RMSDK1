@@ -13,7 +13,7 @@ from PIL import Image as PImage
 import cv2
 import opus_decoder
 import pyaudio
-#import robot_connection
+import robot_connection
 import enum
 import queue
 import connect
