@@ -8,10 +8,7 @@ import RobotLiveview
 #import tmp_fast2
 
 def example():
-	"""
-	以下为连接TCP,UDP获取赛事引擎数据的示例
-	"""
-	print("start")
+    print("start")
     robot = robot_connection.RobotConnection('192.168.42.2')
     robot.open()
 
@@ -24,16 +21,14 @@ def example():
     print('send data to robot   : game_msg on')
     recv = robot.recv_ctrl_data(5)
     print('recv data from robot : %s'%recv)
-
-	#for i in range(1, 50):
-	while True:
-		msg = robot.recv_push_data(5)
+    while True:
+        msg = robot.recv_push_data(5)
 		#print(msg)
-		if msg != "no_OUT":
-			msg_solved = solve.solve_game_msg(msg,printing=False)
-			print(msg_solved)
-	UDP.disconnect()
-	TCP.disconnect()
+        if msg != "no_OUT":
+            msg_solved = solve.solve_game_msg(msg,printing=False)
+            print(msg_solved)
+    UDP.disconnect()
+    TCP.disconnect()
 
 	# -------以上为示例--------
 '''
