@@ -158,7 +158,7 @@ class UDP_connection:
 
 class TCP_video:
 	host = "192.168.42.2"
-	port = 40923
+	port = 40921
 	printing = True
 	connection = False
 
