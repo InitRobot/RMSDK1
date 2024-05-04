@@ -181,7 +181,7 @@ class TCP_video:
 			print("TCP_video_Connected!")
 
 		self.cmd_socket_msg_queue = {
-            self.video_socket: queue.Queue(32)
+            self.TCP_socket: queue.Queue(32)
         }
 		self.cmd_socket_recv_thread = threading.Thread(target=self.__socket_recv_task)
 		self.cmd_socket_recv_thread.start() 	
