@@ -136,7 +136,7 @@ class RobotConnection(object):
         """
         Send data to control port
         """
-        msg += ';'
+        #msg += ';'
         self.__send_data(self.ctrl_socket, msg)
 
     def recv_video_data(self, timeout=None, latest_data=False):
@@ -255,17 +255,17 @@ def test():
     robot = RobotConnection('192.168.42.2')
     robot.open()
 
-    robot.send_data('command')
+    robot.send_data('command;')
     print('send data to robot   : command')
     recv = robot.recv_ctrl_data(5)
     print('recv data from robot : %s'%recv)
 
-    robot.send_data('version ?')
+    robot.send_data('version ?;')
     print('send data to robot   : version ?')
     recv = robot.recv_ctrl_data(5)
     print('recv data from robot : %s'%recv)
 
-    robot.send_data('stream on')
+    robot.send_data('stream on;')
     print('send data to robot   : stream on')
     recv = robot.recv_ctrl_data(5)
     print('recv data from robot : %s'%recv)
@@ -274,12 +274,12 @@ def test():
         stream_data = robot.recv_video_data(5)
         print('recv video data from robot %s'%stream_data)
         robot.stop_video_recv()
-    robot.send_data('stream off')
+    robot.send_data('stream off;')
     print('send data to robot   : stream off')
     recv = robot.recv_ctrl_data(5)
     print('recv data from robot : %s'%recv)
 
-    robot.send_data('audio on')
+    robot.send_data('audio on;')
     print('send data to robot   : audio on')
     recv = robot.recv_ctrl_data(5)
     print('recv data from robot : %s'%recv)
@@ -288,12 +288,12 @@ def test():
         stream_data = robot.recv_audio_data(5)
         print('recv audio data from robot %s'%stream_data)
         robot.stop_audio_recv()
-    robot.send_data('audio off')
+    robot.send_data('audio off;')
     print('send data to robot   : audio off')
     recv = robot.recv_ctrl_data(5)
     print('recv data from robot : %s'%recv)
 
-    robot.send_data('quit')
+    robot.send_data('quit;')
     print('send data to robot   : quit')
     recv = robot.recv_ctrl_data(5)
     print('recv data from robot : %s'%recv)
