@@ -167,7 +167,7 @@ class TCP_video:
 		self.printing = printing
 	
 	def connect(self, printing=True):  # 与机器人控制命令端口建立 TCP 连接
-		self.address = (self.host, int(self.port))
+		TCP_video.address = (TCP_video.host, int(TCP_video.port))
 		self.TCP_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		if self.printing or printing:
 			print("Connecting_TCP_video...")
@@ -175,7 +175,7 @@ class TCP_video:
 		#self.TCP_socket.connect(self.address)
 		print(self.address)
 		try:
-			self.TCP_socket.connect(self.address)
+			self.TCP_socket.connect(TCP_video.address)
 		except Exception as e:
 			print('Connection failed, the reason is %s'%e)
 		self.connection = True
