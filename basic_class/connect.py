@@ -173,7 +173,7 @@ class TCP_video:
 		
 		#self.TCP_socket.connect(self.address)
 		try:
-			self.TCP_socket.connect((host, port))
+			self.TCP_socket.connect(self.address)
 		except Exception as e:
 			print('Connection failed, the reason is %s'%e)
 		self.connection = True
