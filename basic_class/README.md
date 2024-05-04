@@ -197,3 +197,4 @@ TCP.disconnect()
 - 20240504
     - 13:10 发现是因为导入auto_aim导致的
     - 14:56 经过研究不知道为啥TCP_video连不上，决定使用官方的robot_connect
+    - 16:05 我的大脑在燃烧
