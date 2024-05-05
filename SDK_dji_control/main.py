@@ -103,7 +103,8 @@ def video_test():
 		print("target information:",pos_arr)
 		if len(pos_arr) == 0:
 			continue
-		if float(pos_arr[0]) != 0:
+		aim = False
+		if float(pos_arr[0]) != 0 and aim:
 			posx = float(pos_arr[2])+40
 			posy = float(pos_arr[3])-20
 			yaw = int((posx/360-1)*55)
