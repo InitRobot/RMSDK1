@@ -75,7 +75,7 @@ class RobotLiveview(object):
         self.connection.close()
 
     def display(self):
-        self.command('command;')
+        #self.command('command;')
         time.sleep(1)
         #self.command('audio on;')
         #time.sleep(1)
@@ -140,7 +140,7 @@ class RobotLiveview(object):
     def _video_display_task(self):
         print("_video_display_task")
         self.is_shutdown = False
-        print(self.is_shutdown)
+        #print(self.is_shutdown)
         while not self.is_shutdown: 
             try:
                 frame = self.video_decoder_msg_queue.get(timeout=2)
