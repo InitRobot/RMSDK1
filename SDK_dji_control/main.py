@@ -105,13 +105,13 @@ def video_test():
 			continue
 
 		#robot.send_data('game_msg on;')
-		if float(pos_arr[0]) != 0:
+		'''if float(pos_arr[0]) != 0:
 			posx = float(pos_arr[0])+40
 			posy = float(pos_arr[1])-20
 			yaw = int((posx/360-1)*55)
 			pitch = -int((posy/180-1)*55)
 			print(yaw,pitch)
-			robot.send_data('gimbal move p '+ pitch +' y '+ yaw +';')
+			robot.send_data('gimbal move p '+ pitch +' y '+ yaw +';')'''
 		#print(msg)
 		#if msg:
 			#msg_solved = solve.solve_game_msg(msg,printing=False)
