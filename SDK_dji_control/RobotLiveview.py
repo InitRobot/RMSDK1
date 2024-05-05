@@ -112,9 +112,10 @@ class RobotLiveview(object):
         package_data = b''
 
         self.connection.start_video_recv()
-
+        print("_video_decoder_task")
         while not self.is_shutdown: 
             buff = self.connection.recv_video_data()
+            #print(buff)
             if buff:
                 package_data += buff
                 if len(buff) != 1460:
@@ -134,6 +135,7 @@ class RobotLiveview(object):
         self.connection.stop_video_recv()
 
     def _video_display_task(self):
+        print("_video_display_task")
         while not self.is_shutdown: 
             try:
                 frame = self.video_decoder_msg_queue.get(timeout=2)
