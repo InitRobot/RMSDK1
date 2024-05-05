@@ -52,9 +52,10 @@ class RobotLiveview(object):
 
     def open(self):
         if self.connection_type is ConnectionType.WIFI_DIRECT:
-            self.connection.update_robot_ip(RobotLiveview.WIFI_DIRECT_IP)
+            self.connection.update_robot_ip(RobotLiveview.WIFI_DIRECT_IP)#pass
         elif self.connection_type is ConnectionType.USB_DIRECT:
-            self.connection.update_robot_ip(RobotLiveview.USB_DIRECT_IP)
+            self.connection.update_robot_ip(RobotLiveview.USB_DIRECT_IP)#here
+            print("USB")
         elif self.connection_type is ConnectionType.WIFI_NETWORKING:
             robot_ip = self.connection.get_robot_ip(timeout=10)  
             if robot_ip:
@@ -73,13 +74,13 @@ class RobotLiveview(object):
         self.connection.close()
 
     def display(self):
-        self.command('command')
+        self.command('command;')
         time.sleep(1)
-        self.command('audio on')
+        self.command('audio on;')
         time.sleep(1)
-        self.command('stream on')
+        self.command('stream on;')
         time.sleep(1)
-        self.command('stream on')
+        self.command('stream on;')
 
         self.video_decoder_thread.start()
         self.video_display_thread.start()

@@ -137,6 +137,7 @@ class RobotConnection(object):
         Send data to control port
         """
         #msg += ';'
+        print("send:",msg)
         self.__send_data(self.ctrl_socket, msg)
 
     def recv_video_data(self, timeout=None, latest_data=False):
