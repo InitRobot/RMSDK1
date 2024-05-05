@@ -86,7 +86,9 @@ def solve_game_msg(msg, printing = True):
 		"mouse_move" : [0,0],
     }
 	solveablity = True
-	msg_solved, solveablity = solve_game(msg,printing=printing)
+	#msg_solved, solveablity = solve_game(msg,printing=printing)
+	msg_solved = msg
+ 
 	if solveablity and msg_solved[0] == 1:
 		#print(msg)
 		msg_information = solve_information(msg_solved,printing=printing)
