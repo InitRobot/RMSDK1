@@ -100,7 +100,7 @@ def video_test():
 		msg = robot.recv_push_data(5)
 		if msg:
 			msg_solved = solve.solve_game_msg(msg,printing=False)
-			print(msg_solved)
+			#print(msg_solved)
 	UDP.disconnect()
 	TCP.disconnect()
 
