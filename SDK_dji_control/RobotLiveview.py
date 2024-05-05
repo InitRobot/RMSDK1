@@ -29,7 +29,7 @@ class RobotLiveview(object):
     WIFI_DIRECT_IP = '192.168.2.1'
     WIFI_NETWORKING_IP = ''
     USB_DIRECT_IP = '192.168.42.2'
-        
+    self.target = None
     def __init__(self, connection_type, connection_robot):
         self.connection = connection_robot
         self.connection_type = connection_type
