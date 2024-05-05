@@ -99,11 +99,21 @@ def video_test():
 	robot_liveview.display()
 	while True:
 		msg = robot.recv_push_data(5)
+		msg = str(msg, encoding = "utf-8")
+		#print("msg:",msg)
+		if msg:
+			msg_solved = solve.solve_game_msg(msg,printing=False)
+			#print("msg_solved:",msg_solved)
+   
+
 		pos_arr = robot_liveview.get_target()
 		print("target information:",pos_arr)
 		if len(pos_arr) == 0:
 			continue
 		aim = False
+		if "E" in msg_solved["keys"]:
+			print("E:auto_aim")
+			aim = True
 		if float(pos_arr[0]) != 0 and aim:
 			posx = float(pos_arr[2])+40
 			posy = float(pos_arr[3])-20
@@ -111,11 +121,7 @@ def video_test():
 			pitch = -int((posy/180-1)*55)
 			print("yaw,pitch:",yaw,pitch)
 			robot.send_data('gimbal move p '+ str(pitch) +' y '+ str(yaw) +';')
-		msg = str(msg, encoding = "utf-8")
-		print("msg:",msg)
-		if msg:
-			msg_solved = solve.solve_game_msg(msg,printing=False)
-			print("msg_solved:",msg_solved)
+
 	UDP.disconnect()
 	TCP.disconnect()
 
