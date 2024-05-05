@@ -99,8 +99,9 @@ def video_test():
 	robot_liveview.display()
 	while True:
 		msg = robot.recv_push_data(5)
-		if msg:
-			msg_solved = solve.solve_game_msg(msg,printing=False)
+		print(msg)
+		#if msg:
+			#msg_solved = solve.solve_game_msg(msg,printing=False)
 			#print(msg_solved)
 	UDP.disconnect()
 	TCP.disconnect()

@@ -150,8 +150,10 @@ class RobotLiveview(object):
                 continue
             image = PImage.fromarray(frame)
             img = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
-            cv2.imshow("Liveview", img)
-            cv2.waitKey(1)
+            #auto_aim()?
+            auto_aim(img)
+            #cv2.imshow("Liveview", img)
+            #cv2.waitKey(1)
 
     def _audio_decoder_task(self):
         package_data = b''
