@@ -193,7 +193,7 @@ TCP.disconnect()
     - 16:35 发现RMSDK没有赛事数据推送到文档，有BUG，放弃
 - 20240503
     - 13:11 试图优化视频流
-    - 16:32 实现延时在3秒左右的视频流，发现无法作为库来调![image-20240503163414848](C:\Users\Victor\AppData\Roaming\Typora\typora-user-images\image-20240503163414848.png)
+    - 16:32 实现延时在3秒左右的视频流，发现无法作为库来调![image-20240505164551577](C:\Users\Victor\AppData\Roaming\Typora\typora-user-images\image-20240505164551577.png)
 - 20240504
     - 13:10 发现是因为导入auto_aim导致的
     - 14:56 经过研究不知道为啥TCP_video连不上，决定使用官方的robot_connect
@@ -220,4 +220,5 @@ TCP.disconnect()
     - 15:26 SDK_dji_control/RobotLiveview.py实现视频流获取，计划改为最后一帧
     - 15:31 SDK_dji_control/RobotLiveview.py实现最后一帧获取
     - 16:19 尝试auto_aim.py
-    - 16:43 香橙派上貌似出了问题![image-20240505164406807](C:\Users\Victor\AppData\Roaming\Typora\typora-user-images\image-20240505164406807.png)
+    - 16:43 香橙派上貌似出了问题![](C:\Users\Victor\AppData\Roaming\Typora\typora-user-images\image-20240505164617110.png)
+
