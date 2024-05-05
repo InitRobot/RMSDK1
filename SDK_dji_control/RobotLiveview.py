@@ -152,6 +152,7 @@ class RobotLiveview(object):
             image = PImage.fromarray(frame)
             img = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
             #auto_aim()?
+            print("auto_aim")
             auto_aim.auto_aim(img)
             #cv2.imshow("Liveview", img)
             #cv2.waitKey(1)
