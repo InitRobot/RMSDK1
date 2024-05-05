@@ -156,7 +156,7 @@ class RobotLiveview(object):
             #cv2.imshow("Liveview", img)
             #cv2.waitKey(1)
 
-    def _audio_decoder_task(self):
+    '''def _audio_decoder_task(self):
         package_data = b''
 
         self.connection.start_audio_recv()
@@ -199,7 +199,7 @@ class RobotLiveview(object):
             stream.write(output)
 
         stream.stop_stream()
-        stream.close()
+        stream.close()'''
 
 
 def test():

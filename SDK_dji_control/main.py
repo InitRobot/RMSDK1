@@ -99,7 +99,7 @@ def video_test():
 	robot_liveview.display()
 	while True:
 		msg = robot.recv_push_data(5)
-		print(msg)
+		#print(msg)
 		#if msg:
 			#msg_solved = solve.solve_game_msg(msg,printing=False)
 			#print(msg_solved)
