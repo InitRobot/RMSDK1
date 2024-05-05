@@ -105,7 +105,7 @@ def video_test():
         	yaw = int((posx/360-1)*55)
        		pitch = -int((posy/180-1)*55)
         	print(yaw,pitch)
-        	ep_gimbal.move(yaw=yaw, pitch=pitch, pitch_speed=20, yaw_speed=20)
+        	#ep_gimbal.move(yaw=yaw, pitch=pitch, pitch_speed=20, yaw_speed=20)
 			robot.send_data('gimbal move p '+ pitch +' y '+ yaw +';')
 		#print(msg)
 		#if msg:
