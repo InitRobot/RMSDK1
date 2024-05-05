@@ -37,15 +37,15 @@ class RobotLiveview(object):
         self.video_decoder = libh264decoder.H264Decoder()
         libh264decoder.disable_logging()
 
-        self.audio_decoder = opus_decoder.opus_decoder() 
+        #self.audio_decoder = opus_decoder.opus_decoder() 
 
         self.video_decoder_thread = threading.Thread(target=self._video_decoder_task)
         self.video_decoder_msg_queue = queue.Queue(64)
         self.video_display_thread = threading.Thread(target=self._video_display_task)
 
-        self.audio_decoder_thread = threading.Thread(target=self._audio_decoder_task)
-        self.audio_decoder_msg_queue = queue.Queue(32)
-        self.audio_display_thread = threading.Thread(target=self._audio_display_task)
+        #self.audio_decoder_thread = threading.Thread(target=self._audio_decoder_task)
+        #self.audio_decoder_msg_queue = queue.Queue(32)
+        #self.audio_display_thread = threading.Thread(target=self._audio_display_task)
 
         self.command_ack_list = []
 
