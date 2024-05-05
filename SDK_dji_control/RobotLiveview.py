@@ -4,6 +4,7 @@ import sys
 sys.path.append('../decoder/ubuntu/output/')
 sys.path.append('../../connection/network/')
 
+import auto_aim
 import threading
 import time
 import numpy as np
