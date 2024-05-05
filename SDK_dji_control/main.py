@@ -100,7 +100,7 @@ def video_test():
 	while True:
 		msg = robot.recv_push_data(5)
 		pos_arr = robot_liveview.get_target()
-		print(pos_arr)
+		#print(pos_arr)
 		if len(pos_arr) == 0:
 			continue
 		if float(pos_arr[0]) != 0:
@@ -110,7 +110,7 @@ def video_test():
 			pitch = -int((posy/180-1)*55)
 			print(yaw,pitch)
 			robot.send_data('gimbal move p '+ str(pitch) +' y '+ str(yaw) +';')
-		#print(msg)
+		print(msg)
 		if msg:
 			msg_solved = solve.solve_game_msg(msg,printing=False)
 			print(msg_solved)

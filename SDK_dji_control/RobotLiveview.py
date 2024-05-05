@@ -154,7 +154,7 @@ class RobotLiveview(object):
             #auto_aim()?
             #print("auto_aim")
             self.target = auto_aim.auto_aim(img)
-            print(self.target)
+            #print(self.target)
             #cv2.imshow("Liveview", img)
             #cv2.waitKey(1)
     
