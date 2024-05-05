@@ -221,4 +221,5 @@ TCP.disconnect()
     - 15:31 SDK_dji_control/RobotLiveview.py实现最后一帧获取
     - 16:19 尝试auto_aim.py
     - 16:43 香橙派上貌似出了问题![](C:\Users\Victor\AppData\Roaming\Typora\typora-user-images\image-20240505164617110.png)
+    - 17:19 实现自瞄
 

@@ -6,7 +6,7 @@ import time
 model = YOLO('../../RM-yolo/runs/best.pt')
 
 def auto_aim(img):
-    print("auto_aiming")
+    #print("auto_aiming")
     results = model(img)
     for r in results:
         boxes = r.boxes
@@ -14,10 +14,11 @@ def auto_aim(img):
     pos = str(pos)
     pos_arr = []
     pos_arr = re.findall("\d+\.?\d*", pos)
-    print("↓\n")
+    #print("↓\n")
     print(pos_arr)
-    print("↑\n")
+    #print("↑\n")
 
     annotated_frame = results[0].plot()
     cv2.imshow("YOLOv8", annotated_frame)
     cv2.waitKey(1)
+    return pos_arr
