@@ -101,6 +101,8 @@ def video_test():
 		msg = robot.recv_push_data(5)
 		pos_arr = robot_liveview.get_target()
 		print(pos_arr)
+		if pos_arr:
+			continue
 
 		#robot.send_data('game_msg on;')
 		if float(pos_arr[0]) != 0:
