@@ -75,20 +75,12 @@ class RobotLiveview(object):
 
     def display(self):
         self.command('command;')
-        recv = robot.recv_ctrl_data(5)
-        print('recv data from robot : %s'%recv)
         time.sleep(1)
         self.command('audio on;')
-        recv = robot.recv_ctrl_data(5)
-        print('recv data from robot : %s'%recv)
         time.sleep(1)
         self.command('stream on;')
-        recv = robot.recv_ctrl_data(5)
-        print('recv data from robot : %s'%recv)
         time.sleep(1)
         self.command('stream on;')
-        recv = robot.recv_ctrl_data(5)
-        print('recv data from robot : %s'%recv)
 
         self.video_decoder_thread.start()
         self.video_display_thread.start()

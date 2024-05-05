@@ -139,6 +139,9 @@ class RobotConnection(object):
         #msg += ';'
         print("send:",msg)
         self.__send_data(self.ctrl_socket, msg)
+        recv = self.recv_ctrl_data(5)
+        print('recv data from robot : %s'%recv)
+
 
     def recv_video_data(self, timeout=None, latest_data=False):
         """
