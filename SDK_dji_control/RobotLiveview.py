@@ -162,7 +162,7 @@ class RobotLiveview(object):
         try:
             return self.target
         except Exception:
-            return None
+            return 
 
     '''def _audio_decoder_task(self):
         package_data = b''
