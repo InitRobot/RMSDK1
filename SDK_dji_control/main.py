@@ -95,7 +95,7 @@ def video_test():
 	print('send data to robot   : command')
 	robot.send_data('game_msg on;')
 	print('send data to robot   : game_msg on')
-	robot.display(TCP)
+	robot_liveview.display(TCP)
 	while True:
 		msg = robot.recv_push_data(5)
 		if msg:
