@@ -69,15 +69,15 @@ class RobotLiveview(object):
         self.is_shutdown = True
         self.video_decoder_thread.join()
         self.video_display_thread.join()
-        self.audio_decoder_thread.join()
-        self.audio_display_thread.join()
+        #self.audio_decoder_thread.join()
+        #self.audio_display_thread.join()
         self.connection.close()
 
     def display(self):
         self.command('command;')
         time.sleep(1)
-        self.command('audio on;')
-        time.sleep(1)
+        #self.command('audio on;')
+        #time.sleep(1)
         self.command('stream on;')
         time.sleep(1)
         self.command('stream on;')
@@ -85,8 +85,8 @@ class RobotLiveview(object):
         self.video_decoder_thread.start()
         self.video_display_thread.start()
 
-        self.audio_decoder_thread.start()
-        self.audio_display_thread.start()
+        #self.audio_decoder_thread.start()
+        #self.audio_display_thread.start()
 
         print('display!')
 
@@ -126,6 +126,9 @@ class RobotLiveview(object):
                                 break
                             print('video decoder queue full')
                             continue
+                        if self.video_decoder_msg_queue.qsize() >= 3:
+                            self.video_decoder_msg_queue.get(timeout=1)
+                        print("queuesize:",self.video_decoder_msg_queue.qsize())
                     package_data=b''
 
         self.connection.stop_video_recv()
