@@ -50,7 +50,7 @@ def chassis_controll():
 	disk_mode = False
 	wait = 0
 	TCP.IN_OUT("robot mode free;", printing=True)
-	auto_aim.connect()
+	#auto_aim.connect()
 	print("connected")
 	while True:
 		#time.sleep(0.1)
