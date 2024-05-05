@@ -6,6 +6,7 @@ import time
 model = YOLO('../../RM-yolo/runs/best.pt')
 
 def auto_aim(img):
+    print("auto_aiming")
     results = model(img)
     for r in results:
         boxes = r.boxes
