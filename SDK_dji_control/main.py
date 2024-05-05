@@ -108,4 +108,4 @@ def video_test():
 
 if __name__ == '__main__':
 	#chassis_controll()
-	example()
+	video_test()
