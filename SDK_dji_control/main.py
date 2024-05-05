@@ -90,7 +90,7 @@ def video_test():
 	print("start")
 	robot = robot_connection.RobotConnection('192.168.42.2')
 	robot.open()
-	robot_liveview = RobotLiveview(RobotLiveview.ConnectionType.USB_DIRECT, robot)
+	robot_liveview = RobotLiveview.RobotLiveview(3, robot)
 	robot.send_data('command;')
 	print('send data to robot   : command')
 	robot.send_data('game_msg on;')
