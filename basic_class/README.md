@@ -219,3 +219,4 @@ TCP.disconnect()
     - 14:02 官方的RobotLiveview运行无法返回视频，发现原来写好的tmp_fast2.py也无法正常运行
     - 15:26 SDK_dji_control/RobotLiveview.py实现视频流获取，计划改为最后一帧
     - 15:31 SDK_dji_control/RobotLiveview.py实现最后一帧获取
+    - 16:19 尝试auto_aim.py
