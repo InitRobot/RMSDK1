@@ -153,9 +153,16 @@ class RobotLiveview(object):
             img = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
             #auto_aim()?
             #print("auto_aim")
-            target = auto_aim.auto_aim(img)
+            self.target = auto_aim.auto_aim(img)
+            print(self.target)
             #cv2.imshow("Liveview", img)
             #cv2.waitKey(1)
+    
+    def get_target(self):
+        try:
+            return self.target
+        except Exception:
+            return None
 
     '''def _audio_decoder_task(self):
         package_data = b''

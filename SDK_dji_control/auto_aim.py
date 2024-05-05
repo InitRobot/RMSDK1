@@ -15,7 +15,7 @@ def auto_aim(img):
     pos_arr = []
     pos_arr = re.findall("\d+\.?\d*", pos)
     #print("↓\n")
-    print(pos_arr)
+    #print(pos_arr)
     #print("↑\n")
 
     annotated_frame = results[0].plot()
