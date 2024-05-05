@@ -101,10 +101,11 @@ def video_test():
 		msg = robot.recv_push_data(5)
 		pos_arr = robot_liveview.get_target()
 		print(pos_arr)
-		posx = float(pos_arr[0])+40
-		posy = float(pos_arr[1])-20
+
 		#robot.send_data('game_msg on;')
 		if float(pos_arr[0]) != 0:
+			posx = float(pos_arr[0])+40
+			posy = float(pos_arr[1])-20
 			yaw = int((posx/360-1)*55)
 			pitch = -int((posy/180-1)*55)
 			print(yaw,pitch)
