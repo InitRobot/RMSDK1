@@ -223,4 +223,7 @@ TCP.disconnect()
     - 16:43 香橙派上貌似出了问题![](C:\Users\Victor\AppData\Roaming\Typora\typora-user-images\image-20240505164617110.png)
     - 17:19 实现自瞄
     - 17:45 target格式略有问题，先下班
+- 20240506
+    - 6:55 在为避免画面卡住增加quit，command后反倒无法开始video_socket
+
 
