@@ -113,6 +113,7 @@ class RobotLiveview(object):
 
         self.connection.start_video_recv()
         print("_video_decoder_task")
+        print(self.is_shutdown)
         while not self.is_shutdown: 
             buff = self.connection.recv_video_data()
             #print(buff)
@@ -136,6 +137,7 @@ class RobotLiveview(object):
 
     def _video_display_task(self):
         print("_video_display_task")
+        print(self.is_shutdown)
         while not self.is_shutdown: 
             try:
                 frame = self.video_decoder_msg_queue.get(timeout=2)
