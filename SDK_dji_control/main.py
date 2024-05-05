@@ -109,7 +109,7 @@ def video_test():
 			yaw = int((posx/360-1)*55)
 			pitch = -int((posy/180-1)*55)
 			print(yaw,pitch)
-			robot.send_data('gimbal move p '+ pitch +' y '+ yaw +';')
+			robot.send_data('gimbal move p '+ str(pitch) +' y '+ str(yaw) +';')
 		#print(msg)
 		if msg:
 			msg_solved = solve.solve_game_msg(msg,printing=False)
