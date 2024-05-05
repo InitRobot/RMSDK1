@@ -73,7 +73,7 @@ def chassis_controll():
 			
 			if "E" in msg_solved["keys"]:
 				print("E:auto_aim")
-				auto_aim.auto_aim()
+				#auto_aim.auto_aim()
 				#os.system('cd ~/RM-yolo/RMSDK && python3 06_final.py')
 			
 			if disk_mode:
