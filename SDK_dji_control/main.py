@@ -86,32 +86,25 @@ def chassis_controll():
 	UDP.disconnect()
 	TCP.disconnect()
 
-'''def video_test():
+def video_test():
 	print("start")
-    robot = robot_connection.RobotConnection('192.168.42.2')
-    robot.open()
-    robot2 = RobotLiveview(ConnectionType.USB_DIRECT)
-    robot.send_data('command;')
-    print('send data to robot   : command')
-    recv = robot.recv_ctrl_data(5)
-    print('recv data from robot : %s'%recv)
-    
-    robot.send_data('game_msg on;')
-    print('send data to robot   : game_msg on')
-    recv = robot.recv_ctrl_data(5)
-    print('recv data from robot : %s'%recv)
-    while True:
-        msg = robot.recv_push_data(5)
-        #print(msg)
-        if msg:
-            msg_solved = solve.solve_game_msg(msg,printing=False)
-            print(msg_solved)
-    UDP.disconnect()
-    TCP.disconnect()
+	robot = robot_connection.RobotConnection('192.168.42.2')
+	robot.open()
+	robot_liveview = RobotLiveview(ConnectionType.USB_DIRECT, robot)
+	robot.send_data('command;')
+	print('send data to robot   : command')
+	robot.send_data('game_msg on;')
+	print('send data to robot   : game_msg on')
 	robot.display(TCP)
-	#tmp_fast2.test()
 	while True:
-		pass'''
+		msg = robot.recv_push_data(5)
+		if msg:
+			msg_solved = solve.solve_game_msg(msg,printing=False)
+			print(msg_solved)
+	UDP.disconnect()
+	TCP.disconnect()
+
+	#tmp_fast2.test()
 
 if __name__ == '__main__':
 	#chassis_controll()

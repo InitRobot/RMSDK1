@@ -29,8 +29,8 @@ class RobotLiveview(object):
     WIFI_NETWORKING_IP = ''
     USB_DIRECT_IP = '192.168.42.2'
         
-    def __init__(self, connection_type):
-        self.connection = robot_connection.RobotConnection()
+    def __init__(self, connection_type, connection_robot):
+        self.connection = connection_robot
         self.connection_type = connection_type
 
         self.video_decoder = libh264decoder.H264Decoder()
