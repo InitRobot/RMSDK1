@@ -101,7 +101,7 @@ def video_test():
 		msg = robot.recv_push_data(5)
 		pos_arr = robot_liveview.get_target()
 		print(pos_arr)
-		if pos_arr:
+		if len(pos_arr) == 0:
 			continue
 
 		#robot.send_data('game_msg on;')
