@@ -105,5 +105,5 @@ def video_test():
 		pass
 
 if __name__ == '__main__':
-	#chassis_controll()
-	video_test()
+	chassis_controll()
+	#video_test()
