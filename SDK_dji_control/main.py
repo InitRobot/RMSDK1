@@ -126,8 +126,8 @@ def video_test():
 		if float(pos_arr[0]) != 0 and aim:
 			posx = float(pos_arr[0])+640
 			posy = float(pos_arr[1])-360
-			yaw = int((posx/360-1)*55)
-			pitch = -int((posy/180-1)*55)
+			yaw = int((posx/360-1)*5)
+			pitch = -int((posy/180-1)*5)
 			print("yaw,pitch:",yaw,pitch)
 			robot.send_data('gimbal move p '+ str(pitch) +' y '+ str(yaw) +';')
 
