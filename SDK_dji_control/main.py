@@ -107,7 +107,7 @@ def video_test():
 		msg = robot.recv_push_data(5)
 		msg = str(msg, encoding = "utf-8")
 		#print("msg:",msg)
-		if msg:
+		if msg != None:
 			msg_solved = solve.solve_game_msg(msg,printing=False)
 			#print("msg_solved:",msg_solved)
    
