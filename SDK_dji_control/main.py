@@ -91,10 +91,10 @@ def video_test():
 	robot = robot_connection.RobotConnection('192.168.42.2')
 	robot.open()
 	robot.send_data('command;')
-	time.sleep(1)
+	'''time.sleep(1)
 	robot.send_data('quit;')
 	time.sleep(1)
-	robot.send_data('command;')
+	robot.send_data('command;')'''
 	time.sleep(1)
 	#print('send data to robot   : command')
 	robot.send_data('game_msg on;')
