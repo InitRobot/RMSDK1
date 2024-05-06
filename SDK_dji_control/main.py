@@ -124,8 +124,8 @@ def video_test():
 				aim = True
 		aim = True
 		if float(pos_arr[0]) != 0 and aim:
-			posx = float(pos_arr[2])+40
-			posy = float(pos_arr[3])-20
+			posx = float(pos_arr[0])+640
+			posy = float(pos_arr[1])-360
 			yaw = int((posx/360-1)*55)
 			pitch = -int((posy/180-1)*55)
 			print("yaw,pitch:",yaw,pitch)
