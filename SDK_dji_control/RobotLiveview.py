@@ -118,7 +118,7 @@ class RobotLiveview(object):
         print(self.is_shutdown)
         while not self.is_shutdown: 
             buff = self.connection.recv_video_data()
-            print(buff)
+            #print(buff)
             if buff:
                 package_data += buff
                 if len(buff) != 1460:

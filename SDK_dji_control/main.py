@@ -113,7 +113,7 @@ def video_test():
    
 
 		pos_arr = robot_liveview.get_target()
-		#print("target information:",pos_arr)
+		print("target information:",pos_arr)
 		if len(pos_arr) == 0:
 			continue
 		aim = False
