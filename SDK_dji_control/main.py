@@ -122,6 +122,7 @@ def video_test():
 			if "E" in msg_solved["keys"]:
 				print("E:auto_aim")
 				aim = True
+		aim = True
 		if float(pos_arr[0]) != 0 and aim:
 			posx = float(pos_arr[2])+40
 			posy = float(pos_arr[3])-20
