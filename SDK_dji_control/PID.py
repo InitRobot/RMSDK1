@@ -1,10 +1,3 @@
-
-Kp = [0,0]
-Ki = 
-Kd = 
-
-def PID(type_choice,error):
-
 class PID:
     sum_error = 0
     self.last_error = 0
