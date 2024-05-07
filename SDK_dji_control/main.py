@@ -88,8 +88,8 @@ def chassis_controll():
 	TCP.disconnect()
 
 def video_test():
-	yaw_PID = PID.PID(20,0,0)
-	pitch_PID = PID.PID(20,0,0)
+	yaw_PID = PID.PID(200,0,0)
+	pitch_PID = PID.PID(200,0,0)
 	print("start")
 	robot = robot_connection.RobotConnection('192.168.42.2')
 	robot.open()
