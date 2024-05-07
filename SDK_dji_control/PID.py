@@ -1,6 +1,6 @@
 class PID:
     sum_error = 0
-    self.last_error = 0
+    last_error = 0
     def __init__(self,Kp,Ki,Kd):
         self.Kp = Kp
         self.Ki = Ki
