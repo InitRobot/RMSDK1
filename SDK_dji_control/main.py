@@ -6,6 +6,7 @@ import os
 #import auto_aim
 import RobotLiveview
 #import tmp_fast2
+import PID
 
 def example():
 	print("start")
@@ -87,6 +88,8 @@ def chassis_controll():
 	TCP.disconnect()
 
 def video_test():
+	yaw_PID = PID.PID(5,0,0)
+	pitch_PID = PID.PID(5,0,0)
 	print("start")
 	robot = robot_connection.RobotConnection('192.168.42.2')
 	robot.open()
@@ -127,8 +130,8 @@ def video_test():
 			posx = (float(pos_arr[0])-640)/640
 			posy = (float(pos_arr[1])-360)/360
 			print("------------------x,y:",posx,posy)
-			yaw = int(posx*5)
-			pitch = -int(posy*5)
+			yaw = int(yaw_PID.control(posx))
+			pitch = -int(yaw_PID.control(posx))
 			print("yaw,pitch:",yaw,pitch)
 			robot.send_data('gimbal move p '+ str(pitch) +' y '+ str(yaw) +';')
 
