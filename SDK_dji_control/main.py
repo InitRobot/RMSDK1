@@ -133,7 +133,7 @@ def video_test():
 			yaw = int(yaw_PID.control(posx))
 			pitch = -int(yaw_PID.control(posx))
 			print("yaw,pitch:",yaw,pitch)
-			robot.send_data('gimbal move vp '+ str(pitch) +' vy '+ str(yaw) +';')
+			robot.send_data('gimbal speed p '+ str(pitch) +' y '+ str(yaw) +';')
 
 	UDP.disconnect()
 	TCP.disconnect()
