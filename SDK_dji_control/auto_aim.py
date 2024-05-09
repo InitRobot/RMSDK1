@@ -19,6 +19,6 @@ def auto_aim(img):
     #print("↑\n")
 
     annotated_frame = results[0].plot()
-    cv2.imshow("YOLOv8", annotated_frame)
-    cv2.waitKey(1)
+    #cv2.imshow("YOLOv8", annotated_frame)
+    #cv2.waitKey(1)
     return pos_arr
