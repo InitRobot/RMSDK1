@@ -101,6 +101,7 @@ def video_test():
 	time.sleep(1)
 	#print('send data to robot   : command')
 	robot.send_data('game_msg on;')
+	robot.send_data('robot mode free;')
 	time.sleep(1)
 	robot_liveview = RobotLiveview.RobotLiveview(3, robot)
 	#print('send data to robot   : game_msg on')
