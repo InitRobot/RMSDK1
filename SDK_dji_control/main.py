@@ -131,7 +131,7 @@ def video_test():
 			posy = (float(pos_arr[1])-360)/360
 			print("------------------x,y:",posx,posy)
 			yaw = int(yaw_PID.control(posx))
-			pitch = -int(yaw_PID.control(posx))
+			pitch = -int(pitch_PID.control(posy))
 			print("yaw,pitch:",yaw,pitch)
 			robot.send_data('gimbal speed p '+ str(pitch) +' y '+ str(yaw) +';')
 
