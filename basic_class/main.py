@@ -148,6 +148,37 @@ def target_xy(t,mode = 1):
             
     return Flag_move,x_t,y_t
 
+def solve_chassis_position(msg, printing=True):
+	result = ''
+	if msg[0:22] == 'chassis push position ' and msg[-1] == ';':
+		# print('right_start')
+		info = msg[22:-3]
+		if printing:
+			print(info)
+		info_list = info.split(' ')
+		if printing:
+			print(info_list)
+		info_list_float = []
+		for i in info_list:
+			if printing:
+				print(i)
+			if i != "-0.000" and i != "0.000":
+				if printing:
+					print("float")
+				if i[0] == '-':
+					info_list_float.append(-float(i[1:]))
+				else:
+					info_list_float.append(float(i))
+			else:
+				info_list_float.append(0)
+		if printing:
+			print(info_list_float)
+		result = info_list_float
+	else:
+		if printing:
+			print('please give a chassis push position push')
+	return result
+
 kp_x = 4
 ki_x = 0.01
 kd_x = 2
@@ -204,7 +235,7 @@ def auto_move():
 		msg = UDP.try_get(timeout = 1,printing=False)
 		print(msg)
 		chassis_position = []
-		chassis_position = solve.solve_chassis_position(msg,printing=False)
+		chassis_position = solve_chassis_position(msg, printing=True)
 		#print(chassis_position)
 		#chassis speed x 0.1 y 0.1 z 1;
 		if chassis_position != '':
