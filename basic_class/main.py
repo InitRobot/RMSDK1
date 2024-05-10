@@ -104,6 +104,135 @@ def video_test():
 	while True:
 		pass
 
+
+#------------------------
+def solve(x, a, b, c, d):
+    y  = ((b-d)/((a-c)**2)) * ((x-c)**2) + d
+    return y
+
+x_joints =     [0,   -1.8  , -2.5  ,  -3    , -1.7]
+y_joints =     [0,   -1.45 , -2    ,  -3    , -5]
+def target_xy(t,mode = 1):
+    Flag_move = False
+    x_t = 0
+    y_t = 0
+    if mode == 1:
+        Flag_move = True
+        point = -1
+        point_1 = -1
+        time_changes = [3.3,  4    ,  4.7  ,   5.5]
+        x_joints =     [0,   -1.8  , -2.5  ,  -3    , -1.7]
+        y_joints =     [0,   -1.45 , -2    ,  -3    , -5]
+        for t_c in time_changes:
+            point_1 += 1
+            if t < t_c:
+                point = point_1
+                break
+        if point != -1:
+            if point == 0:
+                x_t = ((1.8/3.3**2) * (t - 3.3) ** 2 - 1.8)
+                y_t = ((-1.45/3.3**2) * t ** 2)
+            if point == 1:
+                x_t = (-0.8/0.7**2 * (t - 3.3) ** 2 - 1.8)
+                y_t = ((2-1.45)/0.7**2 * (t-4) ** 2 - 2)
+            if point == 2:
+                x_t = solve(t, 4, -2.5, 4.7, -3)
+                y_t = solve(t, 4.7, -3, 4, -2)
+            if point == 3:
+                x_t = solve(t, 5.5, -1.7, 4.7, -3)
+                y_t = solve(t, 4.7, -3, 5.5, -5)
+        else:
+            x_t = x_joints[-1]
+            y_t = y_joints[-1]
+
+            
+    return Flag_move,x_t,y_t
+
+kp_x = 4
+ki_x = 0.01
+kd_x = 2
+
+kp_y = 6
+ki_y = 0.01
+kd_y = 2
+#target = 0.5
+x_error_list = []
+x_target_list = []
+x_list = []
+x_speed_list = []
+
+y_error_list = []
+y_target_list = []
+y_list = []
+y_speed_list = []
+
+def auto_move():
+	print("start")
+	TCP = connect.TCP_connection(printing=False)
+	UDP = connect.UDP_connection(printing=False)
+	TCP.connect_enter_SDK(printing=False)
+	UDP.connect(printing=False)
+	#TCP.IN_OUT("game_msg on;",printing=False)
+	#for i in range(1, 50):
+	#disk_mode = False
+	#wait = 0
+	TCP.IN_OUT("robot mode free;", printing=True)
+	TCP.IN_OUT("chassis push position on pfreq 50;",printing=False)
+	#auto_aim.connect()
+	print("connected")
+	
+	start_time = time.perf_counter()
+
+	now_time = time.perf_counter() - start_time
+
+	first_step_time = 3.3
+
+	x_last_error = 0
+	y_last_error = 0
+
+	x_sum_error = 0
+	y_sum_error = 0
+	for i in range(1,800):
+		#print(i)
+		SDK_.IN_OUT("chassis push position on pfreq 50;",printing=False)
+		now_time = time.perf_counter() - start_time
+		Flag,x_target,y_target = target_xy(now_time,mode=1)
+		#x_target = ((1.7/3.3**2) * (now_time - 3.3) ** 2 - 1.7)
+		x_target_list.append(x_target)
+		#y_target = ((-1.45/3.3**2) * now_time ** 2)
+		y_target_list.append(y_target)
+		msg = Message_Delivery.try_get(timeout = 1,printing=False)
+		chassis_position = []
+		chassis_position = MSG_Solve.solve_chassis_position(msg,printing=False)
+		#print(chassis_position)
+		#chassis speed x 0.1 y 0.1 z 1;
+		if chassis_position != '':
+			x_error = x_target - chassis_position[0]
+			x_list.append(chassis_position[0])
+			x_error_list.append(x_error)
+			x_speed = kp_x * x_error + kd_x * (x_error * 2 - x_last_error) + ki_x * x_sum_error
+			y_error = y_target - chassis_position[1]
+			y_list.append(chassis_position[1])
+			y_error_list.append(y_error)
+			y_speed = kp_y * y_error + kd_y * (y_error * 2 - y_last_error) + ki_y * y_sum_error
+			#print("--------------",x_speed)
+			x_speed_list.append(x_speed)
+			y_speed_list.append(y_speed)
+			SDK_.IN_OUT("chassis speed x " + str(x_speed) + " y " + str(y_speed) + " z 0;",printing=False)
+			#SDK_.IN_OUT("chassis speed x " + str(x_speed) + " y 0 z 0;",printing=False)
+			#SDK_.IN_OUT("chassis speed x " + str(x_speed) + " y " + str(y_speed) + " z 0;",printing=False)
+			x_sum_error += x_error
+			y_sum_error += y_error
+			x_last_error = x_error
+			y_last_error = y_error
+
+	second_step_time = 5
+	SDK_.IN_OUT("chassis speed x 0 y 0 z 0;",printing=False)
+	#print(error_list)
+	print('end')
+
+
 if __name__ == '__main__':
-	chassis_controll()
+	#chassis_controll()
 	#video_test()
+	auto_move()
