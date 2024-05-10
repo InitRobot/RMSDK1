@@ -107,51 +107,51 @@ def video_test():
 
 #------------------------
 def solve(x, a, b, c, d):
-    y  = ((b-d)/((a-c)**2)) * ((x-c)**2) + d
-    return y
+	y  = ((b-d)/((a-c)**2)) * ((x-c)**2) + d
+	return y
 
 x_joints =     [0,   -1.8  , -2.5  ,  -3    , -1.7]
 y_joints =     [0,   -1.45 , -2    ,  -3    , -5]
 def target_xy(t,mode = 1):
-    Flag_move = False
-    x_t = 0
-    y_t = 0
-    if mode == 1:
-        Flag_move = True
-        point = -1
+	Flag_move = False
+	x_t = 0
+	y_t = 0
+	if mode == 1:
+		Flag_move = True
+		point = -1
 		step = 0
-        point_1 = 0
-        time_changes = [0,	3.3,  4    ,  4.7  ,   5.5]
-        x_joints =     [0,   -1.8  , -2.5  ,  -3    , -1.7]
-        y_joints =     [0,   -1.45 , -2    ,  -3    , -5]
-        for t_c in time_changes:
-            point_1 += 1
-            if t < t_c:
-                point = point_1
-                break
-        if point != -1:
-            if point == 0:
+		point_1 = 0
+		time_changes = [0,	3.3,  4    ,  4.7  ,   5.5]
+		x_joints =     [0,   -1.8  , -2.5  ,  -3    , -1.7]
+		y_joints =     [0,   -1.45 , -2    ,  -3    , -5]
+		for t_c in time_changes:
+			point_1 += 1
+			if t < t_c:
+				point = point_1
+				break
+		if point != -1:
+			if point == 0:
 				step = 1
-                x_t = (solve(t, time_changes[step], x_joints[step], time_changes[step+1], x_joints[step+1]))
-                y_t = (solve(t, time_changes[step+1], y_joints[step+1], time_changes[step], y_joints[step]))
-            if point == 1:
+				x_t = (solve(t, time_changes[step], x_joints[step], time_changes[step+1], x_joints[step+1]))
+				y_t = (solve(t, time_changes[step+1], y_joints[step+1], time_changes[step], y_joints[step]))
+			if point == 1:
 				step = 2
-                x_t = (solve(t, time_changes[step], x_joints[step], time_changes[step+1], x_joints[step+1]))
-                y_t = (solve(t, time_changes[step+1], y_joints[step+1], time_changes[step], y_joints[step]))
-            if point == 2:
+				x_t = (solve(t, time_changes[step], x_joints[step], time_changes[step+1], x_joints[step+1]))
+				y_t = (solve(t, time_changes[step+1], y_joints[step+1], time_changes[step], y_joints[step]))
+			if point == 2:
 				step = 3
-                x_t = (solve(t, time_changes[step], x_joints[step], time_changes[step+1], x_joints[step+1]))
-                y_t = (solve(t, time_changes[step+1], y_joints[step+1], time_changes[step], y_joints[step]))
-            if point == 3:
+				x_t = (solve(t, time_changes[step], x_joints[step], time_changes[step+1], x_joints[step+1]))
+				y_t = (solve(t, time_changes[step+1], y_joints[step+1], time_changes[step], y_joints[step]))
+			if point == 3:
 				step = 4
-                x_t = (solve(t, time_changes[step], x_joints[step], time_changes[step+1], x_joints[step+1]))
-                y_t = (solve(t, time_changes[step+1], y_joints[step+1], time_changes[step], y_joints[step]))
-        else:
-            x_t = x_joints[-1]
-            y_t = y_joints[-1]
+				x_t = (solve(t, time_changes[step], x_joints[step], time_changes[step+1], x_joints[step+1]))
+				y_t = (solve(t, time_changes[step+1], y_joints[step+1], time_changes[step], y_joints[step]))
+		else:
+			x_t = x_joints[-1]
+			y_t = y_joints[-1]
 
-            
-    return Flag_move,x_t,y_t
+
+	return Flag_move,x_t,y_t
 
 def solve_chassis_position(msg, printing=True):
 	result = ''
