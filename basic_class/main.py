@@ -194,7 +194,7 @@ def auto_move():
 	y_sum_error = 0
 	for i in range(1,800):
 		#print(i)
-		SDK_.IN_OUT("chassis push position on pfreq 50;",printing=False)
+		TCP.IN_OUT("chassis push position on pfreq 50;",printing=False)
 		now_time = time.perf_counter() - start_time
 		Flag,x_target,y_target = target_xy(now_time,mode=1)
 		#x_target = ((1.7/3.3**2) * (now_time - 3.3) ** 2 - 1.7)
@@ -218,16 +218,16 @@ def auto_move():
 			#print("--------------",x_speed)
 			x_speed_list.append(x_speed)
 			y_speed_list.append(y_speed)
-			SDK_.IN_OUT("chassis speed x " + str(x_speed) + " y " + str(y_speed) + " z 0;",printing=False)
-			#SDK_.IN_OUT("chassis speed x " + str(x_speed) + " y 0 z 0;",printing=False)
-			#SDK_.IN_OUT("chassis speed x " + str(x_speed) + " y " + str(y_speed) + " z 0;",printing=False)
+			TCP.IN_OUT("chassis speed x " + str(x_speed) + " y " + str(y_speed) + " z 0;",printing=False)
+			#TCP.IN_OUT("chassis speed x " + str(x_speed) + " y 0 z 0;",printing=False)
+			#TCP.IN_OUT("chassis speed x " + str(x_speed) + " y " + str(y_speed) + " z 0;",printing=False)
 			x_sum_error += x_error
 			y_sum_error += y_error
 			x_last_error = x_error
 			y_last_error = y_error
 
 	second_step_time = 5
-	SDK_.IN_OUT("chassis speed x 0 y 0 z 0;",printing=False)
+	TCP.IN_OUT("chassis speed x 0 y 0 z 0;",printing=False)
 	#print(error_list)
 	print('end')
 
