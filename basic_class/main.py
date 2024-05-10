@@ -119,9 +119,10 @@ def target_xy(t,mode = 1):
     if mode == 1:
         Flag_move = True
         point = -1
-        point_1 = -1
-        time_changes = [3.3,  4    ,  4.7  ,   5.5]
-        x_joints =     [0,   -1.7  , -2.5  ,  -3    , -1.7]
+		step = 0
+        point_1 = 0
+        time_changes = [0,	3.3,  4    ,  4.7  ,   5.5]
+        x_joints =     [0,   -1.8  , -2.5  ,  -3    , -1.7]
         y_joints =     [0,   -1.45 , -2    ,  -3    , -5]
         for t_c in time_changes:
             point_1 += 1
@@ -130,17 +131,21 @@ def target_xy(t,mode = 1):
                 break
         if point != -1:
             if point == 0:
-                x_t = ((1.8/3.3**2) * (t - 3.3) ** 2 - 1.8)
-                y_t = ((-1.45/3.3**2) * t ** 2)
+				step = 1
+                x_t = (solve(t, time_changes[step], x_joints[step], time_changes[step+1], x_joints[step+1]))
+                y_t = (solve(t, time_changes[step+1], y_joints[step+1], time_changes[step], y_joints[step]))
             if point == 1:
-                x_t = (-0.8/0.7**2 * (t - 3.3) ** 2 - 1.8)
-                y_t = ((2-1.45)/0.7**2 * (t-4) ** 2 - 2)
+				step = 2
+                x_t = (solve(t, time_changes[step], x_joints[step], time_changes[step+1], x_joints[step+1]))
+                y_t = (solve(t, time_changes[step+1], y_joints[step+1], time_changes[step], y_joints[step]))
             if point == 2:
-                x_t = solve(t, 4, -2.5, 4.7, -3)
-                y_t = solve(t, 4.7, -3, 4, -2)
+				step = 3
+                x_t = (solve(t, time_changes[step], x_joints[step], time_changes[step+1], x_joints[step+1]))
+                y_t = (solve(t, time_changes[step+1], y_joints[step+1], time_changes[step], y_joints[step]))
             if point == 3:
-                x_t = solve(t, 5.5, -1.7, 4.7, -3)
-                y_t = solve(t, 4.7, -3, 5.5, -5)
+				step = 4
+                x_t = (solve(t, time_changes[step], x_joints[step], time_changes[step+1], x_joints[step+1]))
+                y_t = (solve(t, time_changes[step+1], y_joints[step+1], time_changes[step], y_joints[step]))
         else:
             x_t = x_joints[-1]
             y_t = y_joints[-1]
