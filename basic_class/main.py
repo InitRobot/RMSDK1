@@ -203,7 +203,7 @@ def auto_move():
 		y_target_list.append(y_target)
 		msg = UDP.try_get(timeout = 1,printing=False)
 		chassis_position = []
-		chassis_position = MSG_Solve.solve_chassis_position(msg,printing=False)
+		chassis_position = solve.solve_chassis_position(msg,printing=False)
 		#print(chassis_position)
 		#chassis speed x 0.1 y 0.1 z 1;
 		if chassis_position != '':
