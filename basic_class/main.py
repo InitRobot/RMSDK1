@@ -202,6 +202,7 @@ def auto_move():
 		#y_target = ((-1.45/3.3**2) * now_time ** 2)
 		y_target_list.append(y_target)
 		msg = UDP.try_get(timeout = 1,printing=False)
+		print(msg)
 		chassis_position = []
 		chassis_position = solve.solve_chassis_position(msg,printing=False)
 		#print(chassis_position)
