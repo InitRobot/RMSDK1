@@ -121,7 +121,7 @@ def target_xy(t,mode = 1):
         point = -1
         point_1 = -1
         time_changes = [3.3,  4    ,  4.7  ,   5.5]
-        x_joints =     [0,   -1.8  , -2.5  ,  -3    , -1.7]
+        x_joints =     [0,   -1.7  , -2.5  ,  -3    , -1.7]
         y_joints =     [0,   -1.45 , -2    ,  -3    , -5]
         for t_c in time_changes:
             point_1 += 1
@@ -225,19 +225,19 @@ def auto_move():
 	y_sum_error = 0
 	for i in range(1,800):
 		#print(i)
-		TCP.IN_OUT("chassis push position on pfreq 50;",printing=False)
+		TCP.IN_OUT("chassis push position on pfreq 50;", printing=False)
 		now_time = time.perf_counter() - start_time
-		Flag,x_target,y_target = target_xy(now_time,mode=1)
+		Flag,x_target,y_target = target_xy(now_time, mode=1)
 		#x_target = ((1.7/3.3**2) * (now_time - 3.3) ** 2 - 1.7)
 		x_target_list.append(x_target)
 		#y_target = ((-1.45/3.3**2) * now_time ** 2)
 		y_target_list.append(y_target)
-		msg = UDP.try_get(timeout = 1,printing=False)
+		msg = UDP.try_get(timeout=1, printing=False)
 		print(msg)
 		chassis_position = []
 		chassis_position = solve_chassis_position(msg, printing=True)
-		#print(chassis_position)
-		#chassis speed x 0.1 y 0.1 z 1;
+		# print(chassis_position)
+		# chassis speed x 0.1 y 0.1 z 1;
 		if chassis_position != '':
 			x_error = x_target - chassis_position[0]
 			x_list.append(chassis_position[0])
@@ -247,12 +247,12 @@ def auto_move():
 			y_list.append(chassis_position[1])
 			y_error_list.append(y_error)
 			y_speed = kp_y * y_error + kd_y * (y_error * 2 - y_last_error) + ki_y * y_sum_error
-			#print("--------------",x_speed)
+			# print("--------------",x_speed)
 			x_speed_list.append(x_speed)
 			y_speed_list.append(y_speed)
 			TCP.IN_OUT("chassis speed x " + str(x_speed) + " y " + str(y_speed) + " z 0;",printing=False)
-			#TCP.IN_OUT("chassis speed x " + str(x_speed) + " y 0 z 0;",printing=False)
-			#TCP.IN_OUT("chassis speed x " + str(x_speed) + " y " + str(y_speed) + " z 0;",printing=False)
+			# TCP.IN_OUT("chassis speed x " + str(x_speed) + " y 0 z 0;",printing=False)
+			# TCP.IN_OUT("chassis speed x " + str(x_speed) + " y " + str(y_speed) + " z 0;",printing=False)
 			x_sum_error += x_error
 			y_sum_error += y_error
 			x_last_error = x_error
