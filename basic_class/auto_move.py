@@ -83,7 +83,7 @@ class Auto:
             now_time = time.perf_counter() - start_time
             print("time:-------", now_time)
             dir_ = self.root.get_stage(now_time)
-            print(round(dir_, 2))
+            print(round(dir_ / math.pi * 180, 2))
             x = self.speed * math.sin(dir_)
             y = self.speed * math.cos(dir_)
             self.tcp.IN_OUT("chassis speed x " + str(y) + " y " + str(x) + ";", printing=printing)
