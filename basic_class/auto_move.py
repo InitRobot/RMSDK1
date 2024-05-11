@@ -85,7 +85,8 @@ class Auto:
             print(dir_)
             x = self.speed * math.sin(dir_)
             y = self.speed * math.cos(dir_)
-            self.tcp.IN_OUT("chassis move x " + str(x) + " y " + str(y) + ";", printing=printing)
+            result = self.tcp.IN_OUT("chassis move x " + str(y) + " y " + str(x) + ";", printing=printing)
+            print(result)
             if not dir_:
                 moving = False
             # time.sleep(0.1)
