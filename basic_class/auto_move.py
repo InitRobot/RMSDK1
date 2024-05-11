@@ -81,7 +81,7 @@ class Auto:
         start_time = time.perf_counter()
         while moving:
             now_time = time.perf_counter() - start_time
-            # print("time:-------", now_time)
+            print("time:-------", now_time)
             dir_ = self.root.get_stage(now_time)
             print(round(dir_, 2))
             x = self.speed * math.sin(dir_)
