@@ -82,11 +82,11 @@ class Auto:
             now_time = time.perf_counter() - start_time
             # print("time:-------", now_time)
             dir_ = self.root.get_stage(now_time)
-            print(dir_)
+            print(round(dir_, 2))
             x = self.speed * math.sin(dir_)
             y = self.speed * math.cos(dir_)
-            result = self.tcp.IN_OUT("chassis move x " + str(y) + " y " + str(x) + ";", printing=printing)
-            print(result)
+            self.tcp.IN_OUT("chassis move x " + str(y) + " y " + str(x) + ";", printing=printing)
+            # print(result)
             if not dir_:
                 moving = False
             # time.sleep(0.1)
