@@ -65,7 +65,7 @@ class Auto:
     ki_y = 0.01
     kd_y = 2
 
-    type_list = [1]
+    type_list = [6]
     parameter_list = [0.5]
     speed = 0.5
 
