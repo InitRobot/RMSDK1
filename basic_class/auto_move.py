@@ -37,6 +37,7 @@ class Root:
             degree = math.pi / 2 * (self.time_cnt_list[i] - t) / (self.time_cnt_list[i] - self.time_cnt_list[i - 1])
         except IndexError:
             return False
+        print("degree", degree)
         if self.p_type_list[i - 1] == 1:
             return math.pi * 1
         elif self.p_type_list[i - 1] == 2:
@@ -72,7 +73,7 @@ class Auto:
     def __init__(self, tcp, printing=True):  #
         self.tcp = tcp
         self.tcp.IN_OUT("robot mode free;", printing=printing)
-        #self.tcp.IN_OUT("chassis push position on pfreq 50;", printing=printing)
+        # self.tcp.IN_OUT("chassis push position on pfreq 50;", printing=printing)
         self.root = Root(self.type_list, self.parameter_list, self.speed)
 
     def move(self, printing=True):
