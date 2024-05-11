@@ -43,13 +43,13 @@ class Root:
         elif self.p_type_list[i - 1] == 2:
             return math.pi * 0.5
         elif self.p_type_list[i - 1] == 3:
-            return 1.5 * math.pi - degree
+            return math.pi + degree
         elif self.p_type_list[i - 1] == 4:
-            return 1 / math.tan(degree)
+            return math.pi - degree
         elif self.p_type_list[i - 1] == 5:
-            return math.pi - 1 / math.tan(degree)
+            return 1.5 * math.pi + degree
         elif self.p_type_list[i - 1] == 6:
-            return math.pi + 1 / math.tan(degree)
+            return 1.5 * math.pi - degree
         elif self.p_type_list[i - 1] == 7:
             return 0
         elif self.p_type_list[i - 1] == 8:
