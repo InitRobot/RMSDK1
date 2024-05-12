@@ -21,6 +21,7 @@ try:
         a = time.time()
         print(a)
         success, frame = capture.read()
+        print(frame)
         #result, imgencode = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 50])  # 编码
         # server.sendall(imgencode)  # 发送视频帧数据
         #imgencode = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
