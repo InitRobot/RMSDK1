@@ -225,5 +225,7 @@ TCP.disconnect()
     - 17:45 target格式略有问题，先下班
 - 20240506
     - 6:55 在为避免画面卡住增加quit，command后反倒无法开始video_socket
+- 20240513
+    - 6:57 开始配置摄像头所需库[基于香橙派 调用USB摄像头 的两种方法（命令&脚本）_香橙派dakaiusb-CSDN博客](https://blog.csdn.net/Super_Fisher_man/article/details/137027059?ops_request_misc=&request_id=&biz_id=102&utm_term=香橙派摄像头&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-137027059.142^v100^pc_search_result_base8&spm=1018.2226.3001.4187)[香橙派使用摄像头_ov13855-CSDN博客](https://blog.csdn.net/m0_58944591/article/details/129788061?ops_request_misc=%7B%22request%5Fid%22%3A%22171555329516800226580626%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&request_id=171555329516800226580626&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-129788061-null-null.142^v100^pc_search_result_base8&utm_term=香橙派摄像头&spm=1018.2226.3001.4187)
 
 
