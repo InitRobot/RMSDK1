@@ -38,22 +38,30 @@ class Root:
         except IndexError:
             return False
         print("degree", degree)
-        if self.p_type_list[i - 1] == 1:
+        if self.p_type_list[i - 1] == 1:  # down
             return math.pi * 1
-        elif self.p_type_list[i - 1] == 2:
+        elif self.p_type_list[i - 1] == 2:  # left
             return math.pi * 0.5
-        elif self.p_type_list[i - 1] == 3:
+        elif self.p_type_list[i - 1] == 3:  # down 7
             return math.pi - degree
-        elif self.p_type_list[i - 1] == 4:
+        elif self.p_type_list[i - 1] == 4:  # down r
             return math.pi + degree
-        elif self.p_type_list[i - 1] == 5:
+        elif self.p_type_list[i - 1] == 5:  # down l
             return 1.5 * math.pi + degree
-        elif self.p_type_list[i - 1] == 6:
+        elif self.p_type_list[i - 1] == 6:  # down j
             return 1.5 * math.pi - degree
-        elif self.p_type_list[i - 1] == 7:
+        elif self.p_type_list[i - 1] == 7:  # up
             return 0
-        elif self.p_type_list[i - 1] == 8:
+        elif self.p_type_list[i - 1] == 8:  # right
             return math.pi * 1.5
+        elif self.p_type_list[i - 1] == 9:  # up 7
+            return 1.5 * math.pi + degree
+        elif self.p_type_list[i - 1] == 10:  # up r
+            return math.pi + degree
+        elif self.p_type_list[i - 1] == 11:  # up r
+            return 1.5 * math.pi + degree
+        elif self.p_type_list[i - 1] == 12:  # up j
+            return 1.5 * math.pi - degree
         return False
 
 
