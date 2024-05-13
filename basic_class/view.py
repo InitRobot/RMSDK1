@@ -7,7 +7,7 @@ import time
 # PORT = 9999
 # server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 # server.connect((HOST, PORT))
-capture = cv2.VideoCapture('3')
+capture = cv2.VideoCapture(0)
 
 w = 3
 h = 4
