@@ -21,7 +21,7 @@ while (cap.isOpened()):
     ss = cap.get(2)
     print(ss)
     if ret == True:
-        cv2.imwrite('./image/' + str(i) + '.jpg', frame)
+        cv2.imshow('./image/' + str(i) + '.jpg', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
     else:
