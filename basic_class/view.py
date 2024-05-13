@@ -11,7 +11,7 @@ capture = cv2.VideoCapture(1)
 
 w = 3
 h = 4
-capture.set(w, 720)
+capture.set(w, 640)
 capture.set(h, 360)
 # l = capture.get(w)
 # k = capture.get(h)
