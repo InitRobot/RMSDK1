@@ -2,7 +2,7 @@ import cv2
 import time
 
 # 可以是网络推流地址 也可以是本地视频地址
-cap = cv2.VideoCapture('http://192.168.1.5/0.ts')
+cap = cv2.VideoCapture(1)
 # fourcc = cv2.VideoWriter_fourcc(*'XVID')
 fps = cap.get(cv2.CAP_PROP_FPS)
 # fps=30
