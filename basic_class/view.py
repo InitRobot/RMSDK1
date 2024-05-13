@@ -20,7 +20,7 @@ try:
     while True:
         a = time.time()
         print(a)
-        success, frame = capture.read()
+        success, frame = capture.read_latest_frame()
         print(frame)
         #result, imgencode = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 50])  # 编码
         # server.sendall(imgencode)  # 发送视频帧数据
