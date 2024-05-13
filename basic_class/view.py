@@ -71,21 +71,22 @@ class RTSCapture(cv2.VideoCapture):
 # PORT = 9999
 # server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 # server.connect((HOST, PORT))
-rtscap = RTSCapture.create(sys.argv[1])
-rtscap.start_read()  #启动子线程并改变 read_latest_frame 的指向
-#capture = cv2.VideoCapture(1)
+if __name__ == '__main__':
+    rtscap = RTSCapture.create(sys.argv[1])
+    rtscap.start_read()  #启动子线程并改变 read_latest_frame 的指向
+    #capture = cv2.VideoCapture(1)
 
-while rtscap.isStarted():
-    ok, frame = rtscap.read_latest_frame()  # read_latest_frame() 替代 read()
-    if not ok:
-        if cv2.waitKey(100) & 0xFF == ord('q'): break
-        continue
+    while rtscap.isStarted():
+        ok, frame = rtscap.read_latest_frame()  # read_latest_frame() 替代 read()
+        if not ok:
+            if cv2.waitKey(100) & 0xFF == ord('q'): break
+            continue
 
-    # 帧处理代码写这里
-    cv2.imshow("cam", frame)
+        # 帧处理代码写这里
+        cv2.imshow("cam", frame)
 
-    if cv2.waitKey(100) & 0xFF == ord('q'):
-        break
-rtscap.stop_read()
-rtscap.release()
-cv2.destroyAllWindows()
+        if cv2.waitKey(100) & 0xFF == ord('q'):
+            break
+    rtscap.stop_read()
+    rtscap.release()
+    cv2.destroyAllWindows()
