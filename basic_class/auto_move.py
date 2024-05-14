@@ -102,6 +102,7 @@ class Auto:
             # print(result)
             print("dir", dir_)
             if not dir_ and dir != 0:
+                print("False")
                 moving = False
             # time.sleep(0.1)
         return True
