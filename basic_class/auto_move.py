@@ -15,7 +15,7 @@ class Root:
         i = 0
         for type_ in self.p_type_list:  # 更新距离与时间
             parameter_ = self.p_parameter_list[i]
-            if 2 < type_ < 7:
+            if 2 < type_ < 7 or 9 < type_ < 13:
                 dis = math.pi * parameter_ / 2
                 self.p_dis_list.append(dis)
                 self.time_cnt_list.append(self.time_cnt_list[len(self.time_cnt_list) - 1] + dis / speed)
