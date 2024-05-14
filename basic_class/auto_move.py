@@ -76,10 +76,8 @@ class Auto:
     ki_y = 0.01
     kd_y = 2
 
-    # type_list = [1, 6, 4, 1, 6, 5]
-    type_list = [11, 12]
-    parameter_list = [1, 1]
-    # parameter_list = [0.3, 2.2, 1, 0.5, 1, 0.5]
+    type_list = [1, 6, 4, 1, 6, 5]
+    parameter_list = [0.3, 2.2, 1, 0.5, 1, 0.5]
     speed = 1
 
     def __init__(self, tcp, printing=True):  #
