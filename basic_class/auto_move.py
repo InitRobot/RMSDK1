@@ -18,11 +18,11 @@ class Root:
             if 2 < type_ < 7 or 9 < type_ < 13:
                 dis = math.pi * parameter_ / 2
                 self.p_dis_list.append(dis)
-                self.time_cnt_list.append(self.time_cnt_list[len(self.time_cnt_list) - 1] + dis / speed)
+                self.time_cnt_list.append(self.time_cnt_list[len(self.time_cnt_list) - 1] + dis / self.speed)
             else:
                 dis = self.p_parameter_list[i]
                 self.p_dis_list.append(dis)
-                self.time_cnt_list.append(self.time_cnt_list[len(self.time_cnt_list) - 1] + dis / speed)
+                self.time_cnt_list.append(self.time_cnt_list[len(self.time_cnt_list) - 1] + dis / self.speed)
             i += 1
 
     def get_stage(self, t):
@@ -78,7 +78,7 @@ class Auto:
 
     type_list = [1, 6, 4, 1, 6, 5]
     parameter_list = [0.3, 2.2, 0.5, 0.5, 1, 0.5]
-    speed = 1.5
+    speed = 0.5
 
     def __init__(self, tcp, printing=True):  #
         self.tcp = tcp
