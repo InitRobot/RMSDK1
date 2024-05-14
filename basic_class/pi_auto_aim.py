@@ -1,11 +1,12 @@
 import get_view
 import re
 from ultralytics import YOLO
+import cv2
 
 class aim:
     model = YOLO('../../RM-yolo/runs/best.pt')
     def __init__(self):
-        self.vidio = get_view.vidio()
+        self.vidio = get_view.vidio(cv2)
 
     def target(self,blue):
         if blue:
