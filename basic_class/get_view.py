@@ -4,6 +4,7 @@ import cv2
 class vidio:
     def __init__(self):
         self.cap = cv2.VideoCapture(1)
+        print("set")
         # fps = cap.get(cv2.CAP_PROP_FPS)
 
     def get_vidio(self, printing=False):
