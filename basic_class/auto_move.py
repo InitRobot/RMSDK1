@@ -38,9 +38,9 @@ class Root:
         except IndexError:
             return False
         print("degree", degree)
-        if self.p_type_list[i - 1] == 1:  # down
+        if self.p_type_list[i - 1] == 1:  # down ok
             return math.pi * 1
-        elif self.p_type_list[i - 1] == 2:  # left
+        elif self.p_type_list[i - 1] == 2:  # left ok
             return math.pi * 0.5
         elif self.p_type_list[i - 1] == 3:  # down 7 ok
             return math.pi - degree
@@ -75,7 +75,7 @@ class Auto:
     kd_y = 2
 
     # type_list = [1, 6, 4, 1, 6, 5]
-    type_list = [1, 2]
+    type_list = [7, 8]
     parameter_list = [1, 1]
     # parameter_list = [0.3, 2.2, 1, 0.5, 1, 0.5]
     speed = 1
