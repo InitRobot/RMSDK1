@@ -59,7 +59,7 @@ class Root:
         elif self.p_type_list[i - 1] == 10:  # up r
             return 0.5 * math.pi - degree
         elif self.p_type_list[i - 1] == 11:  # up l
-            return 1.5 * math.pi + degree
+            return math.pi - degree
         elif self.p_type_list[i - 1] == 12:  # up j
             return 1.5 * math.pi - degree
         return False
