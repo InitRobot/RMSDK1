@@ -52,7 +52,7 @@ class Root:
         elif self.p_type_list[i - 1] == 6:  # down j ok
             return 1.5 * math.pi - degree
         elif self.p_type_list[i - 1] == 7:  # up
-            return 0
+            return 2 * math.pi
         elif self.p_type_list[i - 1] == 8:  # right
             return math.pi * 1.5
         elif self.p_type_list[i - 1] == 9:  # up 7
@@ -101,7 +101,7 @@ class Auto:
             self.tcp.IN_OUT("chassis speed x " + str(y) + " y " + str(x) + ";", printing=printing)
             # print(result)
             print("dir", dir_)
-            if dir_ == False:
+            if not dir_:
                 print("False")
                 moving = False
             # time.sleep(0.1)
