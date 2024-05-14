@@ -11,7 +11,7 @@ size = (int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(cap.get(cv2.CAP_PROP_FRAME_H
 i = 0
 while (cap.isOpened()):
     i = i + 1
-    ret, frame = cap.read()
+    ret, frame = cap.read_latest_frame()
 
     # 获取最新图片
     allcount = cap.get(cv2.CAP_PROP_FRAME_COUNT)
