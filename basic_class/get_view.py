@@ -2,12 +2,12 @@ import cv2
 
 
 class vidio:
-    def __init__(self):
-        self.cap = cv2.VideoCapture(1)
+    def __init__(self, cv2_):
+        self.cap = cv2_.VideoCapture(1)
         print("set")
-        self.fps = self.cap.get(cv2.CAP_PROP_FPS)
+        self.fps = self.cap.get(cv2_.CAP_PROP_FPS)
         # fps=30
-        self.size = (int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
+        self.size = (int(self.cap.get(cv2_.CAP_PROP_FRAME_WIDTH)), int(self.cap.get(cv2_.CAP_PROP_FRAME_HEIGHT)))
         # fps = cap.get(cv2.CAP_PROP_FPS)
 
     def get_vidio(self, printing=False):
@@ -20,7 +20,7 @@ class vidio:
 
 
 if __name__ == '__main__':
-    my_vidio = vidio()
+    my_vidio = vidio(cv2)
     while True:
         frame = my_vidio.get_vidio(printing=True)
         print(frame)
