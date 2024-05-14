@@ -17,7 +17,7 @@ while (cap.isOpened()):
     allcount = cap.get(cv2.CAP_PROP_FRAME_COUNT)
     cap.set(cv2.CAP_PROP_POS_FRAMES, allcount)
 
-    time.sleep(2)
+    #time.sleep(2)
     ss = cap.get(2)
     print(ss)
     if ret == True:
