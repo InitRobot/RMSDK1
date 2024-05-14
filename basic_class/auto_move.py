@@ -60,9 +60,9 @@ class Root:
         elif self.p_type_list[i - 1] == 10:  # up r ok
             return 0.5 * math.pi - degree
         elif self.p_type_list[i - 1] == 11:  # up l
-            return math.pi - degree
+            return 0 - degree
         elif self.p_type_list[i - 1] == 12:  # up j
-            return 1.5 * math.pi - degree
+            return degree
         print("no_move")
         return False
 
