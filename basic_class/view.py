@@ -22,8 +22,8 @@ while (cap.isOpened()):
     print(ss)
     if ret == True:
         print("in")
-        cv2.imshow('./image/' + str(i) + '.jpg', frame)
-        cv2.waitKey(1)
+        #cv2.imshow('./image/' + str(i) + '.jpg', frame)
+        #cv2.waitKey(1)
     else:
         break
 cap.release()
