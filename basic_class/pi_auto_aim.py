@@ -13,7 +13,7 @@ class aim:
             pass
         else:
             img = self.vidio.get_vidio(printing=True)
-            results = model(img)
+            results = self.model(img)
             for r in results:
                 boxes = r.boxes
             pos = boxes.xywh
