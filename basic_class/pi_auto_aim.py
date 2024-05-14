@@ -25,3 +25,4 @@ if __name__ == '__main__':
     a = aim()
     while True:
         a.target(False)
+        print("1")
