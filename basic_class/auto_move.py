@@ -101,7 +101,7 @@ class Auto:
             self.tcp.IN_OUT("chassis speed x " + str(y) + " y " + str(x) + ";", printing=printing)
             # print(result)
             print("dir", dir_)
-            if (not dir_) and (dir_ != 0):
+            if dir_ == False:
                 print("False")
                 moving = False
             # time.sleep(0.1)
