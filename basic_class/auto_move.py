@@ -62,7 +62,7 @@ class Root:
             return math.pi - degree
         elif self.p_type_list[i - 1] == 12:  # up j
             return 1.5 * math.pi - degree
-        return False
+        # return False
 
 
 class Auto:
