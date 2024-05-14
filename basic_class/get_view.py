@@ -6,10 +6,11 @@ class vidio:
         self.cap = cv2.VideoCapture(1)
         #fps = cap.get(cv2.CAP_PROP_FPS)
 
-    def get_vidio(self):
+    def get_vidio(self, printing = False):
         success, frame = self.cap.read_latest_frame()
         if not success:
-            print("fail")
+            if printing:
+                print("fail")
             return False
         return frame
 
@@ -17,5 +18,5 @@ class vidio:
 if __name__ == '__main__':
     my_vidio = vidio
     while True:
-        frame = my_vidio.get_vidio()
+        frame = my_vidio.get_vidio(printing = True)
         print(frame)
