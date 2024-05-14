@@ -36,6 +36,7 @@ class Root:
         try:
             degree = math.pi / 2 * (self.time_cnt_list[i] - t) / (self.time_cnt_list[i] - self.time_cnt_list[i - 1])
         except IndexError:
+            print("IndexError")
             return False
         print("degree", degree)
         if self.p_type_list[i - 1] == 1:  # down ok
@@ -62,7 +63,8 @@ class Root:
             return math.pi - degree
         elif self.p_type_list[i - 1] == 12:  # up j
             return 1.5 * math.pi - degree
-        # return False
+        print("no_move")
+        return False
 
 
 class Auto:
