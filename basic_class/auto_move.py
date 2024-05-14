@@ -58,7 +58,7 @@ class Root:
             return 1.5 * math.pi + degree
         elif self.p_type_list[i - 1] == 10:  # up r
             return 0.5 * math.pi - degree
-        elif self.p_type_list[i - 1] == 11:  # up r
+        elif self.p_type_list[i - 1] == 11:  # up l
             return 1.5 * math.pi + degree
         elif self.p_type_list[i - 1] == 12:  # up j
             return 1.5 * math.pi - degree
@@ -75,7 +75,7 @@ class Auto:
     kd_y = 2
 
     # type_list = [1, 6, 4, 1, 6, 5]
-    type_list = [10]
+    type_list = [11]
     parameter_list = [1]
     # parameter_list = [0.3, 2.2, 1, 0.5, 1, 0.5]
     speed = 1
