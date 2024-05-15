@@ -83,17 +83,18 @@ class Auto:
     speed = 1
 
     def __init__(self, tcp, udp, printing=True):  #
+        self.msg = None
         self.tcp = tcp
         self.udp = udp
         self.tcp.IN_OUT("robot mode free;", printing=printing)
         # self.tcp.IN_OUT("chassis push position on pfreq 50;", printing=printing)
         self.root = Root(self.type_list, self.parameter_list, self.speed)
 
-    def solve_chassis_position(msg, printing=True):
+    def solve_chassis_position(self, printing=True):
         result = ''
-        if msg[0:22] == 'chassis push position ' and msg[-1] == ';':
+        if self.msg[0:22] == 'chassis push position ' and self.msg[-1] == ';':
             # print('right_start')
-            info = msg[22:-3]
+            info = self.msg[22:-3]
             if printing:
                 print(info)
             info_list = info.split(' ')
@@ -124,9 +125,9 @@ class Auto:
         moving = True
         start_time = time.perf_counter()
         while moving:
-            msg = self.udp.try_get(timeout=1, printing=False)
-            print(msg)
-            x_y = self.solve_chassis_position(msg)
+            self.msg = self.udp.try_get(timeout=1, printing=False)
+            print(self.msg)
+            x_y = self.solve_chassis_position()
             print("xy:", x_y)
             now_time = time.perf_counter() - start_time
             print("time:-------", now_time)

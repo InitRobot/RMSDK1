@@ -125,7 +125,7 @@ def solve_gimbal(msg, printing=True):
             print('please give a gimbal msg push')
     return result
 
-
+"""
 def solve_chassis_position(msg, printing=True):
     result = ''
     if msg[0:22] == 'chassis push position ' and msg[-1] == ';':
@@ -156,7 +156,7 @@ def solve_chassis_position(msg, printing=True):
         if printing:
             print('please give a chassis push position push')
     return result
-
+"""
 
 if __name__ == '__main__':
     pass
