@@ -241,5 +241,5 @@ def chassis_pos():
 if __name__ == '__main__':
     # chassis_controll()
     # video_test()
-    # auto_move_()
-    chassis_pos()
+    auto_move_()
+    # chassis_pos()
