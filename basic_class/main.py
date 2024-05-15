@@ -195,15 +195,18 @@ def auto_move_():
     UDP = connect.UDP_connection(printing=False)
     TCP.connect_enter_SDK(printing=False)
     UDP.connect(printing=False)
+    TCP.IN_OUT("chassis push position on pfreq 50;", printing=False)
+    TCP.IN_OUT("robot mode free;", printing=True)
     # TCP.IN_OUT("game_msg on;",printing=False)
     # for i in range(1, 50):
     # disk_mode = False
     # wait = 0
-    auto = auto_move.Auto(TCP)
+    auto = auto_move.Auto(TCP, UDP)
     end = auto.move()
 
     second_step_time = 5
     TCP.IN_OUT("chassis speed x 0 y 0 z 0;", printing=False)
+    TCP.IN_OUT("chassis push position off;", printing=True)
     # print(error_list)
     print('end')
 
@@ -215,7 +218,7 @@ def chassis_pos():
     TCP.connect_enter_SDK(printing=False)
     UDP.connect(printing=False)
     TCP.IN_OUT("chassis push position on pfreq 50;", printing=False)
-    TCP.IN_OUT("gimbal push attitude on;", printing=False)
+    # TCP.IN_OUT("gimbal push attitude on;", printing=False)
     # for i in range(1, 50):
     disk_mode = False
     wait = 0
@@ -226,7 +229,7 @@ def chassis_pos():
         # time.sleep(0.1)
         msg = UDP.try_get(timeout=1, printing=False)
         print(msg)
-        #x_y = solve.solve_gimbal(msg, printing=False)
+        # x_y = solve.solve_gimbal(msg, printing=False)
         x_y = solve_chassis_position(msg, printing=False)
 
         print(x_y)

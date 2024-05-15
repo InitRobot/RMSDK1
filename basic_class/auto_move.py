@@ -82,16 +82,52 @@ class Auto:
     # parameter_list = [0.3, 2.2, 0.5, 0.5, 1, 0.5]
     speed = 1
 
-    def __init__(self, tcp, printing=True):  #
+    def __init__(self, tcp, udp, printing=True):  #
         self.tcp = tcp
+        self.udp = udp
         self.tcp.IN_OUT("robot mode free;", printing=printing)
         # self.tcp.IN_OUT("chassis push position on pfreq 50;", printing=printing)
         self.root = Root(self.type_list, self.parameter_list, self.speed)
+
+    def solve_chassis_position(msg, printing=True):
+        result = ''
+        if msg[0:22] == 'chassis push position ' and msg[-1] == ';':
+            # print('right_start')
+            info = msg[22:-3]
+            if printing:
+                print(info)
+            info_list = info.split(' ')
+            if printing:
+                print(info_list)
+            info_list_float = []
+            for i in info_list:
+                if printing:
+                    print(i)
+                if i != "-0.000" and i != "0.000":
+                    if printing:
+                        print("float")
+                    if i[0] == '-':
+                        info_list_float.append(-float(i[1:]))
+                    else:
+                        info_list_float.append(float(i))
+                else:
+                    info_list_float.append(0)
+            if printing:
+                print(info_list_float)
+            result = info_list_float
+        else:
+            if printing:
+                print('please give a chassis push position push')
+        return result
 
     def move(self, printing=True):
         moving = True
         start_time = time.perf_counter()
         while moving:
+            msg = self.udp.try_get(timeout=1, printing=False)
+            print(msg)
+            x_y = self.solve_chassis_position(msg, printing=False)
+            print("xy:", x_y)
             now_time = time.perf_counter() - start_time
             print("time:-------", now_time)
             dir_ = self.root.get_stage(now_time)
