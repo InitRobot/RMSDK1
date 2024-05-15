@@ -127,7 +127,7 @@ class Auto:
         while moving:
             self.msg = self.udp.try_get(timeout=1, printing=False)
             # print(self.msg)
-            x_y = self.solve_chassis_position()
+            x_y = self.solve_chassis_position(printing=False)
             print("xy:", x_y)
             now_time = time.perf_counter() - start_time
             #bprint("time:-------", now_time)
