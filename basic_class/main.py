@@ -226,8 +226,8 @@ def chassis_pos():
         # time.sleep(0.1)
         msg = UDP.try_get(timeout=1, printing=False)
         print(msg)
-        x_y = solve.solve_gimbal(msg, printing=False)
-        x_y = solve.solve_chassis_position(msg, printing=False)
+        #x_y = solve.solve_gimbal(msg, printing=False)
+        x_y = solve_chassis_position(msg, printing=False)
 
         print(x_y)
         # print(msg)
