@@ -126,18 +126,18 @@ class Auto:
         start_time = time.perf_counter()
         while moving:
             self.msg = self.udp.try_get(timeout=1, printing=False)
-            print(self.msg)
+            # print(self.msg)
             x_y = self.solve_chassis_position()
             print("xy:", x_y)
             now_time = time.perf_counter() - start_time
-            print("time:-------", now_time)
+            #bprint("time:-------", now_time)
             dir_ = self.root.get_stage(now_time)
             print(round(dir_ / math.pi * 180, 2))
             x = self.speed * math.sin(dir_)
             y = self.speed * math.cos(dir_)
             self.tcp.IN_OUT("chassis speed x " + str(y) + " y " + str(x) + ";", printing=printing)
             # print(result)
-            print("dir", dir_)
+            # print("dir", dir_)
             if not dir_:
                 print("False")
                 moving = False

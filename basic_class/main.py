@@ -156,6 +156,7 @@ def target_xy(t, mode=1):
 
     return Flag_move, x_t, y_t
 
+
 """
 def solve_chassis_position(msg, printing=True):
     result = ''
@@ -188,6 +189,7 @@ def solve_chassis_position(msg, printing=True):
             print('please give a chassis push position push')
     return result
 """
+
 
 def auto_move_():
     print("start")
