@@ -189,25 +189,6 @@ def solve_chassis_position(msg, printing=True):
     return result
 
 
-kp_x = 4
-ki_x = 0.01
-kd_x = 2
-
-kp_y = 6
-ki_y = 0.01
-kd_y = 2
-# target = 0.5
-x_error_list = []
-x_target_list = []
-x_list = []
-x_speed_list = []
-
-y_error_list = []
-y_target_list = []
-y_list = []
-y_speed_list = []
-
-
 def auto_move_():
     print("start")
     TCP = connect.TCP_connection(printing=False)
@@ -227,7 +208,30 @@ def auto_move_():
     print('end')
 
 
+def chassis_pos():
+    print("start")
+    TCP = connect.TCP_connection(printing=False)
+    UDP = connect.UDP_connection(printing=False)
+    TCP.connect_enter_SDK(printing=False)
+    UDP.connect(printing=False)
+    TCP.IN_OUT("chassis push position on pfreq 50;", printing=False)
+    # for i in range(1, 50):
+    disk_mode = False
+    wait = 0
+    TCP.IN_OUT("robot mode free;", printing=True)
+    # auto_aim.connect()
+    print("connected")
+    while True:
+        # time.sleep(0.1)
+        msg = UDP.try_get(timeout=1, printing=False)
+        print(msg)
+        # print(msg)
+    UDP.disconnect()
+    TCP.disconnect()
+
+
 if __name__ == '__main__':
     # chassis_controll()
     # video_test()
-    auto_move_()
+    #auto_move_()
+    chassis_pos()
