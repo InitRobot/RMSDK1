@@ -80,7 +80,7 @@ class Auto:
     type_list = [1]
     parameter_list = [1]
     # parameter_list = [0.3, 2.2, 0.5, 0.5, 1, 0.5]
-    speed = 2
+    speed = 1
 
     def __init__(self, tcp, printing=True):  #
         self.tcp = tcp
