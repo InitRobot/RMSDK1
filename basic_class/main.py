@@ -225,6 +225,8 @@ def chassis_pos():
         # time.sleep(0.1)
         msg = UDP.try_get(timeout=1, printing=False)
         print(msg)
+        x_y = solve.solve_chassis_position(msg, printing=False)
+        print(x_y)
         # print(msg)
     UDP.disconnect()
     TCP.disconnect()
@@ -233,5 +235,5 @@ def chassis_pos():
 if __name__ == '__main__':
     # chassis_controll()
     # video_test()
-    #auto_move_()
+    # auto_move_()
     chassis_pos()
