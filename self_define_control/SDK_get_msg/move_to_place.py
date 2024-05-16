@@ -26,8 +26,8 @@ for i in range(1, 200):
 		error = target - chassis_position[0]
 		error_list.append(error)
 		x_speed = kp * error
-		# print("--------------",x_speed)
-		# SDK_.IN_OUT("chassis speed x " + str(x_speed) + " y 0 z 0;",printing=True)
+	# print("--------------",x_speed)
+	# SDK_.IN_OUT("chassis speed x " + str(x_speed) + " y 0 z 0;",printing=True)
 # print(error_list)
 # plt.plot(range(1,200),error_list)
 # plt.show()

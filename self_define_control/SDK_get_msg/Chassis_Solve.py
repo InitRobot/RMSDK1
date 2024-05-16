@@ -9,7 +9,7 @@ side_speed = 50
 
 def Stright_Solve(keys, printing=True):
 	# SDK_.IN_OUT("gimbal recenter;")
-	
+
 	result = []
 	# 对应    左右
 	wheel = [0, 0,  # 前(head)
@@ -63,7 +63,7 @@ def Disk_solve(keys, degree, spin=1, printing=True):
 		wheel_stright_W[2] = math.sin((degreew / 180 + 0.25) * math.pi)
 		wheel_stright_W[3] = math.sin((degreew / 180 - 0.25) * math.pi)
 		wheel_stright.append(wheel_stright_W)
-	
+
 	if 'S' in keys:
 		degrees = degree - 90
 		wheel_stright_S[0] = math.sin((degrees / 180 - 0.25) * math.pi)
@@ -71,7 +71,7 @@ def Disk_solve(keys, degree, spin=1, printing=True):
 		wheel_stright_S[2] = math.sin((degrees / 180 + 0.25) * math.pi)
 		wheel_stright_S[3] = math.sin((degrees / 180 - 0.25) * math.pi)
 		wheel_stright.append(wheel_stright_S)
-	
+
 	if 'D' in keys:
 		degreed = degree - 180
 		wheel_stright_D[0] = math.sin((degreed / 180 - 0.25) * math.pi)
@@ -79,16 +79,16 @@ def Disk_solve(keys, degree, spin=1, printing=True):
 		wheel_stright_D[2] = math.sin((degreed / 180 + 0.25) * math.pi)
 		wheel_stright_D[3] = math.sin((degreed / 180 - 0.25) * math.pi)
 		wheel_stright.append(wheel_stright_D)
-	
+
 	if printing:
 		print('str', wheel_stright)
 	if len(keys) == 2 or len(keys) == 4 or len(keys) == 5:
 		wheel_spin = wheel_stright[-1]
-	
+
 	if len(keys) == 3:
 		for i in range(0, 4):
 			wheel_spin[i] = (wheel_stright[1][i] + wheel_stright[2][i]) / 2
-	
+
 	# spin
 	if printing:
 		print('sp', wheel_spin)
@@ -96,5 +96,5 @@ def Disk_solve(keys, degree, spin=1, printing=True):
 	wheel_spin[1] = (wheel_spin[1] - 1) / 2
 	wheel_spin[2] = (wheel_spin[2] + 1) / 2
 	wheel_spin[3] = (wheel_spin[3] - 1) / 2
-	
+
 	return wheel_spin

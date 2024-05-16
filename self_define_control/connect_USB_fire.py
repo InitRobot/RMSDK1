@@ -14,14 +14,14 @@ port = 40923
 def connect_TCP():  # 与机器人控制命令端口建立 TCP 连接
 	global s
 	address = (host, int(port))
-	
+
 	# 与机器人控制命令端口建立 TCP 连接
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	
+
 	print("Connecting...")
-	
+
 	s.connect(address)
-	
+
 	print("Connected!")
 
 
@@ -79,8 +79,10 @@ def fire():  # 开火一次
 	# print(str(type(msg)))
 	result = IN_OUT(msg)
 	return result
-	# print('send')
-	# print("msg")
+
+
+# print('send')
+# print("msg")
 
 
 if __name__ == '__main__':

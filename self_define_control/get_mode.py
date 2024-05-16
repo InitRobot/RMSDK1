@@ -13,28 +13,28 @@ port_UDP = 40924
 def connect_TCP():
 	global s
 	address = (host, int(port_TCP))
-	
+
 	# 与机器人控制命令端口建立 TCP 连接
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	
+
 	print("Connecting...")
-	
+
 	s.connect(address)
-	
+
 	print("Connected!")
 
 
 def connect_UDP():
 	global s
 	address = (host, int(port_UDP))
-	
+
 	# 与机器人控制命令端口建立 UDP 连接
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-	
+
 	print("Connecting...")
-	
+
 	s.connect(address)
-	
+
 	print("Connected!")
 
 

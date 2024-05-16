@@ -34,17 +34,17 @@ def start_get_game_msg():
 	tcp_socket.send(msg.encode('utf-8'))
 	buf = tcp_socket.recv(1024)
 	print(buf.decode('utf-8'))
-	
+
 	msg = "quit;"
 	tcp_socket.send(msg.encode('utf-8'))
 	buf = tcp_socket.recv(1024)
 	print(buf.decode('utf-8'))
-	
+
 	msg = "command;"
 	tcp_socket.send(msg.encode('utf-8'))
 	buf = tcp_socket.recv(1024)
 	print(buf.decode('utf-8'))
-	
+
 	# 开始赛事推送
 	msg = "game_msg on;"
 	tcp_socket.send(msg.encode('utf-8'))
@@ -73,7 +73,7 @@ def main():
 				# 判断按下的按键并触发对应函数
 				if 81 in key_num:  # 按下Q
 					os.system('cd ~/RM-yolo/RMSDK && python3 06_final.py')
-	
+
 	# 关闭端口连接
 	tcp_socket.shutdown(socket.SHUT_WR)
 	tcp_socket.close()

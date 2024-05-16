@@ -11,14 +11,14 @@ port = 40923
 def connect_TCP(printing=True):  # 与机器人控制命令端口建立 TCP 连接
 	global TCP_socket
 	address = (host, int(port))
-	
+
 	# 与机器人控制命令端口建立 TCP 连接
 	TCP_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	if printing:
 		print("Connecting_TCP...")
-	
+
 	TCP_socket.connect(address)
-	
+
 	if printing:
 		print("TCP_Connected!")
 

@@ -20,10 +20,10 @@ while True:
 	# print('1')
 	gimbal_msg = SDK_.IN_OUT("gimbal attitude ?;", printing=False)
 	gimbal = MSG_Solve.solve_gimbal(gimbal_msg, printing=False)
-	
+
 	# Try W
 	# key_name_list = ['D']
-	
+
 	# wheel_spin = Chassis_Solve.Disk_solve(key_name_list, gimbal[1])
 	wheel_spin = Chassis_Solve.Stright_Solve(key_name_list, printing=False)
 	print(wheel_spin)

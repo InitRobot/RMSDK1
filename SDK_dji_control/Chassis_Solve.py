@@ -8,15 +8,15 @@ side_speed = 50
 def Stright_Solve(TCP, degree, keys, printing=True):
 	speed_stright = 2
 	# SDK_.IN_OUT("gimbal recenter;")
-	#TCP.IN_OUT("robot mode free;", printing=printing)
+	# TCP.IN_OUT("robot mode free;", printing=printing)
 	result = []
 	# 对应    左右
 	wheel = [0, 0,  # 前(head)
 	         0, 0]  # 后(tail)
 	# 对应    左右
 	wheel2 = [0, 0,  # 前(head)
-	         0, 0]  # 后(tail)
-	#print(degree)
+	          0, 0]  # 后(tail)
+	# print(degree)
 	if abs(degree) >= 2:
 		kp = 0.02
 		wheel2[0] = degree * kp
@@ -53,7 +53,7 @@ def Stright_Solve(TCP, degree, keys, printing=True):
 def Disk_solve(TCP, keys, degree, spin=1, printing=True):
 	speed_disk = 2
 	speed_spin = 1.5
-	#TCP.IN_OUT("robot mode free;", printing=printing)
+	# TCP.IN_OUT("robot mode free;", printing=printing)
 	# 对应        左右
 	wheel_stright = [0, 0,  # 前(head)
 	                 0, 0]  # 后(tail)
@@ -76,7 +76,7 @@ def Disk_solve(TCP, keys, degree, spin=1, printing=True):
 		wheel_stright_W[2] = math.sin((degreew / 180 + 0.25) * math.pi)
 		wheel_stright_W[3] = math.sin((degreew / 180 - 0.25) * math.pi)
 		wheel_stright.append(wheel_stright_W)
-	
+
 	if 'S' in keys:
 		degrees = degree - 90
 		wheel_stright_S[0] = math.sin((degrees / 180 - 0.25) * math.pi)
@@ -84,7 +84,7 @@ def Disk_solve(TCP, keys, degree, spin=1, printing=True):
 		wheel_stright_S[2] = math.sin((degrees / 180 + 0.25) * math.pi)
 		wheel_stright_S[3] = math.sin((degrees / 180 - 0.25) * math.pi)
 		wheel_stright.append(wheel_stright_S)
-	
+
 	if 'D' in keys:
 		degreed = degree - 180
 		wheel_stright_D[0] = math.sin((degreed / 180 - 0.25) * math.pi)
@@ -92,7 +92,7 @@ def Disk_solve(TCP, keys, degree, spin=1, printing=True):
 		wheel_stright_D[2] = math.sin((degreed / 180 + 0.25) * math.pi)
 		wheel_stright_D[3] = math.sin((degreed / 180 - 0.25) * math.pi)
 		wheel_stright.append(wheel_stright_D)
-	
+
 	if printing:
 		print('str', wheel_stright)
 	if len(keys) == 2 or len(keys) == 4 or len(keys) == 5:
@@ -100,7 +100,7 @@ def Disk_solve(TCP, keys, degree, spin=1, printing=True):
 	elif len(keys) == 3:
 		for i in range(0, 4):
 			wheel_spin[i] = (wheel_stright[1][i] + wheel_stright[2][i]) / 2
-	#print(wheel_spin)
+	# print(wheel_spin)
 	# spin
 	if printing:
 		print('sp', wheel_spin)
@@ -108,10 +108,12 @@ def Disk_solve(TCP, keys, degree, spin=1, printing=True):
 	wheel_spin[1] = (wheel_spin[1] * speed_disk - 1 * speed_spin) / 2
 	wheel_spin[2] = (wheel_spin[2] * speed_disk + 1 * speed_spin) / 2
 	wheel_spin[3] = (wheel_spin[3] * speed_disk - 1 * speed_spin) / 2
-	
+
 	return wheel_spin
 
+
 speed = 10
+
 
 def move(TCP, wheel, printing=True):
 	wheel = [i * 1000 / 100 * speed for i in wheel]

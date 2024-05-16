@@ -13,14 +13,14 @@ port = 40923
 def connect():
 	global s
 	address = (host, int(port))
-	
+
 	# 与机器人控制命令端口建立 TCP 连接
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	
+
 	print("Connecting...")
-	
+
 	s.connect(address)
-	
+
 	print("Connected!")
 
 

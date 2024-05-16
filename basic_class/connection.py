@@ -10,21 +10,21 @@ class TCP_connection:
 	port = 40923
 	printing = True
 	connection = False
-	
+
 	def __init__(self, printing=True):
 		self.printing = printing
-	
+
 	def connect(self, printing=True):  # 与机器人控制命令端口建立 TCP 连接
 		self.address = (self.host, int(self.port))
 		self.TCP_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		if self.printing or printing:
 			print("Connecting_TCP...")
-		
+
 		self.TCP_socket.connect(self.address)
 		self.connection = True
 		if self.printing or printing:
 			print("TCP_Connected!")
-	
+
 	def disconnect(self, printing=True):  # 与机器人控制命令端口断开 TCP 连接
 		if not self.connection:
 			if self.printing or printing:
@@ -36,7 +36,7 @@ class TCP_connection:
 		self.TCP_socket.close()
 		if self.printing or printing:
 			print("TCP_disconnected!")
-	
+
 	def IN(self, message, printing=True):  # 检测并向机器发送message
 		if not self.connection:
 			if self.printing or printing:
@@ -49,8 +49,9 @@ class TCP_connection:
 		else:
 			if self.printing or printing:
 				print('please input str that ends with ";"')
-	
-	def try_get_message(self, timeout=5, printing=True):  # 这个函数默认等待5秒钟，如果在这个时间内没有收到机器人的返回结果，就会立即返回'no_OUT'。如果收到了机器人的返回结果，就会解码并返回结果字符串。
+
+	def try_get_message(self, timeout=5,
+	                    printing=True):  # 这个函数默认等待5秒钟，如果在这个时间内没有收到机器人的返回结果，就会立即返回'no_OUT'。如果收到了机器人的返回结果，就会解码并返回结果字符串。
 		if not self.connection:
 			if self.printing or printing:
 				print("You Haven't Connected Yet")
@@ -70,7 +71,7 @@ class TCP_connection:
 				print("Error receiving :", e)
 			sys.exit(1)
 		return result
-	
+
 	def OUT(self, timeout=5, printing=True):  # 检测机器回复
 		if not self.connection:
 			if self.printing or printing:
@@ -81,7 +82,7 @@ class TCP_connection:
 		if self.printing or printing:
 			print("OUT:", result)
 		return result
-	
+
 	def IN_OUT(self, message, timeout=5, printing=True):  # 检测并向机器发送message，检测机器回复
 		if not self.connection:
 			if self.printing or printing:
@@ -91,7 +92,7 @@ class TCP_connection:
 		self.IN(message, printing=self.printing)
 		result = self.OUT(timeout=timeout, printing=self.printing)
 		return result
-	
+
 	def connect_enter_SDK(self, timeout=5, printing=True):  # 与机器人控制命令端口建立 TCP 连接，并进入SDK模式控制
 		if not self.connection:
 			if self.printing or printing:
@@ -108,30 +109,31 @@ class UDP_connection:
 	port = 40924
 	printing = True
 	connection = False
-	
+
 	def __init__(self, printing=True):
 		self.printing = printing
-	
+
 	def connect(self, printing=True):  # 与机器人控制命令端口建立 UDP 连接
 		self.address = (self.host, int(self.port))
 		self.udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-		
+
 		if self.printing or printing:
 			print("Connecting_UDP...")
-		
+
 		self.udp_socket.bind(self.address)
-		
+
 		if self.printing or printing:
 			print("UDP_Connected!")
-	
+
 	def disconnect(self, printing=True):
 		if self.printing or printing:
 			print("UDP disconnecting...")
 		self.udp_socket.close()
 		if self.printing or printing:
 			print("UDP disconnected!")
-	
-	def try_get(self, timeout=5, printing=True):  # 这个函数默认等待5秒钟，如果在这个时间内没有收到机器人的返回结果，就会立即返回'no_OUT'。如果收到了机器人的返回结果，就会解码并返回结果字符串。
+
+	def try_get(self, timeout=5,
+	            printing=True):  # 这个函数默认等待5秒钟，如果在这个时间内没有收到机器人的返回结果，就会立即返回'no_OUT'。如果收到了机器人的返回结果，就会解码并返回结果字符串。
 		result = ''
 		try:
 			# 设置超时时间
@@ -144,16 +146,16 @@ class UDP_connection:
 				result = buf.decode('utf-8')
 			else:
 				result = 'no_OUT'
-		
+
 		except socket.error as e:
 			if self.printing or printing:
 				print("Error receiving :", e)
-			
+
 			sys.exit(1)
-		
+
 		if self.printing or printing:
 			print(result)
-		
+
 		return result
 
 
@@ -230,6 +232,7 @@ def solve_gimbal(msg, printing=True):
 			print('please give a gimbal msg push')
 	return result
 
+
 """
 def solve_chassis_position(msg, printing=True):
 	result = ''
@@ -262,6 +265,7 @@ def solve_chassis_position(msg, printing=True):
 	return result
 """
 
+
 def example():
 	"""
 	以下为连接TCP,UDP获取赛事引擎数据的示例
@@ -271,25 +275,26 @@ def example():
 	UDP = UDP_connection(printing=False)
 	TCP.connect_enter_SDK(printing=False)
 	UDP.connect(printing=False)
-	TCP.IN_OUT("game_msg on;",printing=False)
-	#for i in range(1, 50):
+	TCP.IN_OUT("game_msg on;", printing=False)
+	# for i in range(1, 50):
 	while True:
-		msg = UDP.try_get(timeout=1,printing=False)
+		msg = UDP.try_get(timeout=1, printing=False)
 		if msg != "no_OUT":
-			msg_solved = solve_game(msg,printing=False)
+			msg_solved = solve_game(msg, printing=False)
 			if msg_solved[0] == 0:
-				keys = solve_key(msg_solved,printing=False)
-				keyname = solve_key_name(keys,printing=False)
+				keys = solve_key(msg_solved, printing=False)
+				keyname = solve_key_name(keys, printing=False)
 				print("keynames:", keyname)
 			elif msg_solved[0] == 1:
-				print("Unknow:",msg_solved)
+				print("Unknow:", msg_solved)
 			else:
-				print("-----???-----",msg_solved)
+				print("-----???-----", msg_solved)
 
 	UDP.disconnect()
 	TCP.disconnect()
 
-	# -------以上为示例--------
+
+# -------以上为示例--------
 
 
 if __name__ == '__main__':

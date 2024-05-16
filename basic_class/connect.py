@@ -11,21 +11,21 @@ class TCP_connection:
 	port = 40923
 	printing = True
 	connection = False
-	
+
 	def __init__(self, printing=True):
 		self.printing = printing
-	
+
 	def connect(self, printing=True):  # 与机器人控制命令端口建立 TCP 连接
 		self.address = (self.host, int(self.port))
 		self.TCP_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		if self.printing or printing:
 			print("Connecting_TCP...")
-		
+
 		self.TCP_socket.connect(self.address)
 		self.connection = True
 		if self.printing or printing:
 			print("TCP_Connected!")
-	
+
 	def disconnect(self, printing=True):  # 与机器人控制命令端口断开 TCP 连接
 		if not self.connection:
 			if self.printing or printing:
@@ -37,7 +37,7 @@ class TCP_connection:
 		self.TCP_socket.close()
 		if self.printing or printing:
 			print("TCP_disconnected!")
-	
+
 	def IN(self, message, printing=True):  # 检测并向机器发送message
 		if not self.connection:
 			if self.printing or printing:
@@ -50,8 +50,9 @@ class TCP_connection:
 		else:
 			if self.printing or printing:
 				print('please input str that ends with ";"')
-	
-	def try_get_message(self, timeout=5, printing=True):  # 这个函数默认等待5秒钟，如果在这个时间内没有收到机器人的返回结果，就会立即返回'no_OUT'。如果收到了机器人的返回结果，就会解码并返回结果字符串。
+
+	def try_get_message(self, timeout=5,
+	                    printing=True):  # 这个函数默认等待5秒钟，如果在这个时间内没有收到机器人的返回结果，就会立即返回'no_OUT'。如果收到了机器人的返回结果，就会解码并返回结果字符串。
 		if not self.connection:
 			if self.printing or printing:
 				print("You Haven't Connected Yet")
@@ -71,7 +72,7 @@ class TCP_connection:
 				print("Error receiving :", e)
 			sys.exit(1)
 		return result
-	
+
 	def OUT(self, timeout=5, printing=True):  # 检测机器回复
 		if not self.connection:
 			if self.printing or printing:
@@ -82,7 +83,7 @@ class TCP_connection:
 		if self.printing or printing:
 			print("OUT:", result)
 		return result
-	
+
 	def IN_OUT(self, message, timeout=5, printing=True):  # 检测并向机器发送message，检测机器回复
 		if not self.connection:
 			if self.printing or printing:
@@ -92,7 +93,7 @@ class TCP_connection:
 		self.IN(message, printing=self.printing)
 		result = self.OUT(timeout=timeout, printing=self.printing)
 		return result
-	
+
 	def connect_enter_SDK(self, timeout=5, printing=True):  # 与机器人控制命令端口建立 TCP 连接，并进入SDK模式控制
 		if not self.connection:
 			if self.printing or printing:
@@ -109,30 +110,31 @@ class UDP_connection:
 	port = 40924
 	printing = True
 	connection = False
-	
+
 	def __init__(self, printing=True):
 		self.printing = printing
-	
+
 	def connect(self, printing=True):  # 与机器人控制命令端口建立 UDP 连接
 		self.address = (self.host, int(self.port))
 		self.udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-		
+
 		if self.printing or printing:
 			print("Connecting_UDP...")
-		
+
 		self.udp_socket.bind(self.address)
-		
+
 		if self.printing or printing:
 			print("UDP_Connected!")
-	
+
 	def disconnect(self, printing=True):
 		if self.printing or printing:
 			print("UDP disconnecting...")
 		self.udp_socket.close()
 		if self.printing or printing:
 			print("UDP disconnected!")
-	
-	def try_get(self, timeout=5, printing=True):  # 这个函数默认等待5秒钟，如果在这个时间内没有收到机器人的返回结果，就会立即返回'no_OUT'。如果收到了机器人的返回结果，就会解码并返回结果字符串。
+
+	def try_get(self, timeout=5,
+	            printing=True):  # 这个函数默认等待5秒钟，如果在这个时间内没有收到机器人的返回结果，就会立即返回'no_OUT'。如果收到了机器人的返回结果，就会解码并返回结果字符串。
 		result = ''
 		try:
 			# 设置超时时间
@@ -145,17 +147,18 @@ class UDP_connection:
 				result = buf.decode('utf-8')
 			else:
 				result = 'no_OUT'
-		
+
 		except socket.error as e:
 			if self.printing or printing:
 				print("Error receiving :", e)
-			
+
 			sys.exit(1)
-		
+
 		if self.printing or printing:
 			print(result)
-		
+
 		return result
+
 
 class TCP_video:
 	host = "192.168.42.2"
@@ -165,28 +168,29 @@ class TCP_video:
 
 	def __init__(self, printing=True):
 		self.printing = printing
-	
+
 	def connect(self, printing=True):  # 与机器人控制命令端口建立 TCP 连接
 		TCP_video.address = (TCP_video.host, int(TCP_video.port))
 		self.TCP_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		if self.printing or printing:
 			print("Connecting_TCP_video...")
-		
-		#self.TCP_socket.connect(self.address)
+
+		# self.TCP_socket.connect(self.address)
 		print(self.address)
 		try:
 			self.TCP_socket.connect((self.host, int(TCP_video.port)))
 		except Exception as e:
-			print('Connection failed, the reason is %s'%e)
+			print('Connection failed, the reason is %s' % e)
 		self.connection = True
 		if self.printing or printing:
 			print("TCP_video_Connected!")
 
 		self.cmd_socket_msg_queue = {
-            self.TCP_socket: queue.Queue(32)
-        }
+			self.TCP_socket: queue.Queue(32)
+		}
 		self.cmd_socket_recv_thread = threading.Thread(target=self.__socket_recv_task)
-		self.cmd_socket_recv_thread.start() 	
+		self.cmd_socket_recv_thread.start()
+
 	"""
         Receive control data
 
@@ -199,21 +203,22 @@ class TCP_video:
         data, instead of the data in queue tail.
 
         """
+
 	def recv_video_data(self, timeout=None, latest_data=False):
 		return self.__recv_data(self.TCP_socket, timeout, latest_data)
-	
+
 	def __recv_data(self, socket_obj, timeout, latest_data):
 		msg = None
 		try:
 			msg = self.queue.Queue(32).get(timeout=timeout)
 		except Exception as e:
-				return None
+			return None
 		else:
 			return msg
 
 	def __socket_recv_task(self):
 		while True:
-			rlist, _, _  = select.select([self.TCP_socket], [], [], 2)
+			rlist, _, _ = select.select([self.TCP_socket], [], [], 2)
 			for s in rlist:
 				msg, addr = s.recvfrom(4096)
 				if self.cmd_socket_msg_queue[s].full():
